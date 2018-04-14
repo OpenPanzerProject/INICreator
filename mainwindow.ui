@@ -1,0 +1,4651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1251</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1251</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>1251</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>OP Sound Utility</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* FORM BACKGROUND
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* This is the main background color of the overall form */
+QMainWindow#MainWindow, QWidget#centralWidget {
+	background: #454F65;	/* Dark purple grey */
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* MENU BAR
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* Menu bar */
+QMenuBar{
+    padding-left: 8px;
+	background: #454F65;	/* Dark purple grey */
+	color: #FFF;
+}
+QMenuBar::item {
+/*    spacing: 3px;  spacing between menu bar items */
+    padding: 10px 4px 2px 6px;
+	background: #454F65;
+}
+/* when selected using mouse or keyboard, OR when hovering (there is no hover) */
+QMenuBar::item:selected { 
+    background: #39085A;	/* Purple */
+}
+QMenuBar::item:pressed {
+	border-style: inset;	/*sunken*/
+}
+/* Menu Items */
+QMenu {
+    background-color: white;
+    margin: 2px; /* some spacing around the menu */
+}
+QMenu::item {
+    padding: 2px 25px 2px 20px;
+    border: 1px solid transparent; /* reserve space for selection border */
+}
+QMenu::item:selected {
+    border-color: #39085A;
+	background: #E1E3E3;	/* Light purple grey */
+}
+QMenu::separator {
+    height: 1px;
+    background: #454F65;
+/*    margin-left: 10px;
+    margin-right: 5px;*/
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* OPEN PANZER HEADER FRAME
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+QFrame#frmHeader{
+	background: #39085A;	/* Purple */
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+QPushButton#cmdHideHeader{
+	image: url(:/images/minimize.png);
+	border: none;
+	background: #39085A;
+	padding: 1px;
+	min-height: 11px;
+}
+QPushButton#cmdHideHeader:hover {
+	image: url(:/images/minimize_hover.png);
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* SUB-HEADER: DEVICE NAME, AND SERIAL SETTINGS
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+QFrame#frmSerial{
+	border: 0;
+    border-bottom: 1px solid #666;
+/*    border-top: 1px solid #000; */
+	background-color: #FFF;	/* white */
+}
+QPushButton#cmdRefreshCOMs{
+    image: url(:/images/refresh.png);
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* STACKED WIDGET
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* This is our widget with buttons along the left side and a content area on the right */
+/* Background of area where all the main content boxes are */
+QStackedWidget#stackedWidgetMain{ 
+	border-left: 0;
+	background: #E1E3E3; 	/* Light purple grey */
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* LISTVIEW - THESE ARE THE BUTTONS ALONG THE LEFT SIDE
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+QListView {
+    show-decoration-selected: 1; /* make the selection span the entire width of the view */
+  /*   background: #E1E3E3;	/* Light purple grey */
+    background: #39085A;	/* Purple */
+	color: #000;	/* font-color black */
+}
+/* This is the item not-selected and not-hovered */
+QListView::item {
+	background: #39085A;	/* Purple */
+	color: #FFF;	/* font-color white */
+	padding: 10; 
+	border-top: 1px solid #FFF; /* White */
+	border-bottom: 1px solid #FFF; /* White */
+/*	height: 56px;  -- this seems to make no difference. Instead use Grid Size Height in QListView properties */
+	margin: 0;
+}
+/* Selected */
+QListView::item:selected, QListView::item:selected:active { 
+	/* Horizontal gradient from white on the left to light purple grey on the right, blending into the light purple grey of the form */
+	background: qlineargradient(x1:1, y1:0, x2: 0, y2: 0, stop: 0 #E1E3E3, stop: 1 #FFFFFF);
+	color: #000;
+	border-right: 0;
+}
+/* Hover */
+QListView::item:!selected:hover {
+	background: #454F65;	/* Dark purple grey */
+	color: #FFF;
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* BUTTONS
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+QPushButton{
+    border: 1px solid #666;
+	background: #E4E4F1;
+	padding: 1px;
+	min-height: 10px;
+/*    border-radius: 3px;  */
+}
+QPushButton:pressed, QPushButton:checked {
+    background-color: #C1CADE;
+	padding-top: 2px;
+}
+QPushButton:flat {
+    border: none; /* no border for a flat push button */
+}
+QPushButton:hover {
+	border: 1px solid #000;
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* COMBO BOXES 																														  
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+QComboBox {
+    border: 1px solid #666;
+    padding: 1px 10px 1px 3px;
+/*    border-radius: 3px; */
+}
+/* This is if the value is editable, which mine are probably not going to be */
+QComboBox:editable {
+    background: white;
+}
+/* Background color at rest */
+QComboBox:!editable, QComboBox::drop-down:editable 
+{
+	background: white;
+}
+/* QComboBox gets the &quot;on&quot; state when the list is expanded*/
+/* Note that drop-down refers to the down-arrow box. We are styling it here as well in the case where the list is open. */
+QComboBox:!editable:on, QComboBox::drop-down:editable:on, QComboBox::drop-down:!editable:on
+{
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #E4E4F1, stop: 1 #F7F3F7); 
+/*	background: #E4E4F1; */
+}
+/* shift the text when the list expands */
+QComboBox:on 
+{ 
+    padding-top: 3px;
+}
+ /* shift the arrow when the list expands */
+QComboBox::down-arrow:on 
+{
+    top: 1px;
+}
+/* The &quot;drop-down&quot; is the little box that holds the down arrow - not the drop-down list */
+/* This is the basic format at rest, or when expanded if not over-written by the specific settings for expanded (above) */
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+	background: #E4E4F1;
+    border-left-width: 1px;
+    border-left-color: #666;
+    border-left-style: solid; /* just a single line */
+/*    border-top-right-radius: 3px; 
+    border-bottom-right-radius: 3px; */
+}
+QComboBox::down-arrow:enabled {
+	image:url(:/images/downarrow.png);
+}
+QComboBox::down-arrow:disabled {
+	image:url(:/images/downarrowdisabled.png);
+}
+QComboBox:disabled {
+	background: #E1E3E3;
+}
+/* The box that is shown when expanded is not part of the actual combo box, it is of the QAbstractItemView type */
+QComboBox QAbstractItemView {
+    border: 2px solid #666;;
+	/* This means the selection that you've highlighted while the list is dropped-down */
+    selection-background-color: #C1CADE;
+	color: #000000;
+	/* This is the background color of the dropped-down list */
+	background: white;
+}
+
+/* Scroll handle - Not tested */
+/*QAbstractItemView QScrollBar::handle:vertical {
+	border: 1px solid #666;
+     background: #E1E3E3; 
+     min-height: 20px;
+ }
+
+QScrollBar::handle:vertical {
+	border: 1px solid #666;
+     background: #E1E3E3; 
+     min-height: 20px;
+ }
+*/
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* SPIN and DOUBLE SPIN BOXES
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+QSpinBox, QDoubleSpinBox { 
+    border: 1px solid #666;
+    padding-right: 16px;
+/*    border-radius: 3px; */
+}
+
+QSpinBox:disabled, QDoubleSpinBox:disabled { 
+	background: #E1E3E3;
+}
+QSpinBox::up-button, QDoubleSpinBox::up-button
+{
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 15px; /* 15 + 2*1px border-width = 16px padding + 1 px parent border */
+	background-color: #E4E4F1;
+	border-width: 1px;
+    border: 1px solid #666;
+/*    border-top-right-radius: 3px; */
+}	
+
+QSpinBox::down-button, QDoubleSpinBox::down-button
+{
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 15px; /* 15 + 2*1px border-width = 16px padding + 1 px parent border */
+	background-color: #E4E4F1;
+    border: 1px solid #666;
+	border-width: 1px;
+	border-top: 0px;
+/*    border-bottom-right-radius: 3px;  */
+}	
+QSpinBox::up-arrow, QDoubleSpinBox::up-arrow {
+	image: url(:/images/spin_uparrow.png);
+/*    width: 7px;
+    height: 7px; */
+}
+QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {
+	image: url(:/images/spin_downarrow.png);
+}
+QSpinBox::up-arrow:disabled, QDoubleSpinBox::up-arrow:disabled {
+	image: url(:/images/spin_uparrow_disabled.png);
+}
+QSpinBox::down-arrow:disabled, QDoubleSpinBox::down-arrow:disabled {
+	image: url(:/images/spin_downarrow_disabled.png);
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* CHECK BOXES
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+QCheckBox {
+    spacing: 5px;
+}
+QCheckBox::indicator {
+    width: 14px;
+    height: 14px;
+}
+QCheckBox::indicator:checked {
+    image: url(:/images/checkbox_checked.png);
+}
+QCheckBox::indicator:unchecked {
+    image: url(:/images/checkbox_unchecked.png);
+}
+QCheckBox::indicator:checked:hover {
+    image: url(:/images/checkbox_checked_hover.png);
+}
+QCheckBox::indicator:unchecked:hover {
+    image: url(:/images/checkbox_unchecked_hover.png);
+}
+QCheckBox::indicator:disabled {
+    image: url(:/images/checkbox_disabled_unchecked.png);	
+}
+QCheckBox::indicator:checked:disabled {
+    image: url(:/images/checkbox_disabled_checked.png);	
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* TEXT AND LINE EDITS
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+QTextEdit, QPlainTextEdit, QLineEdit {
+    border: 1px solid #666;
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* LABELS
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+QLabel {
+	color: #000000;
+}
+
+QLabel:disabled {
+	color: #666666;
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* TOOLBAR - NOT USING FOR NOW
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+QToolBar{
+   background: #454F65;
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* PROGRESS BAR
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+QProgressBar {
+    border: 1px solid #000;
+    border-radius: 5px;
+    text-align: center;
+}
+QProgressBar::chunk {
+    background-color: #39085A;
+    width: 10px;
+	margin-right: 0.5px;
+}
+QStatusBar QLabel{
+	color: #C1CADE;
+	border: none; 
+}
+QStatusBar::item { 
+	border: none;
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+/* FORM RESIZE GRIP
+/* ----------------------------------------------------------------------------------------------------------------------------*/
+QSizeGrip {
+    image: url(:/images/resize_handle.png);
+    width: 11px;
+    height: 11px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <property name="topMargin">
+     <number>7</number>
+    </property>
+    <property name="bottomMargin">
+     <number>7</number>
+    </property>
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="sizeConstraint">
+         <enum>QLayout::SetNoConstraint</enum>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QFrame" name="frmHeader">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>55</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QFrame" name="frame_3">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>421</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">	background: url(:/images/OPS.png) no-repeat; </string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="cmdHideHeader">
+           <property name="geometry">
+            <rect>
+             <x>1208</x>
+             <y>4</y>
+             <width>16</width>
+             <height>13</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>16</width>
+             <height>13</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>13</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Minimize Header</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>14</width>
+             <height>11</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <property name="verticalSpacing">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QFrame" name="frmSerial">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>38</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <widget class="QFrame" name="frmDeviceName">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>9</y>
+             <width>491</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">	background: url(:/images/subheader.png) no-repeat; </string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+          </widget>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QListView" name="listViewWest">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+                <horstretch>2</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>150</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="sizeIncrement">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="baseSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Malgun Gothic</family>
+                <pointsize>17</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+                <stylestrategy>PreferAntialias</stylestrategy>
+                <kerning>false</kerning>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Plain</enum>
+              </property>
+              <property name="lineWidth">
+               <number>1</number>
+              </property>
+              <property name="autoScroll">
+               <bool>true</bool>
+              </property>
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="showDropIndicator" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectItems</enum>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="movement">
+               <enum>QListView::Static</enum>
+              </property>
+              <property name="flow">
+               <enum>QListView::TopToBottom</enum>
+              </property>
+              <property name="resizeMode">
+               <enum>QListView::Fixed</enum>
+              </property>
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="gridSize">
+               <size>
+                <width>0</width>
+                <height>49</height>
+               </size>
+              </property>
+              <property name="uniformItemSizes">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QStackedWidget" name="stackedWidgetMain">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>600</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="autoFillBackground">
+               <bool>false</bool>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
+              </property>
+              <property name="currentIndex">
+               <number>1</number>
+              </property>
+              <widget class="QWidget" name="pgRadio">
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <widget class="FrameContent" name="frmChannelOrder">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>0</y>
+                  <width>1061</width>
+                  <height>481</height>
+                 </rect>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::Box</enum>
+                </property>
+                <widget class="ChannelTypeComboBox" name="cboChannel3Type">
+                 <property name="geometry">
+                  <rect>
+                   <x>32</x>
+                   <y>256</y>
+                   <width>101</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="ChannelTypeComboBox" name="cboChannel4Type">
+                 <property name="geometry">
+                  <rect>
+                   <x>32</x>
+                   <y>336</y>
+                   <width>101</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="ChannelTypeComboBox" name="cboChannel2Type">
+                 <property name="geometry">
+                  <rect>
+                   <x>32</x>
+                   <y>176</y>
+                   <width>101</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="ChannelTypeComboBox" name="cboChannel1Type">
+                 <property name="geometry">
+                  <rect>
+                   <x>32</x>
+                   <y>96</y>
+                   <width>101</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>8</pointsize>
+                  </font>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_13">
+                 <property name="geometry">
+                  <rect>
+                   <x>12</x>
+                   <y>95</y>
+                   <width>21</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>1</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_14">
+                 <property name="geometry">
+                  <rect>
+                   <x>12</x>
+                   <y>255</y>
+                   <width>21</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>3</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>121</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="text">
+                  <string>Channel Setup</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_11">
+                 <property name="geometry">
+                  <rect>
+                   <x>12</x>
+                   <y>175</y>
+                   <width>21</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>2</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_12">
+                 <property name="geometry">
+                  <rect>
+                   <x>12</x>
+                   <y>335</y>
+                   <width>21</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>4</string>
+                 </property>
+                </widget>
+                <widget class="HelpButton" name="hpbRadio">
+                 <property name="geometry">
+                  <rect>
+                   <x>1020</x>
+                   <y>10</y>
+                   <width>18</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>18</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="ChannelPositionsComboBox" name="cboCh1NumSwitchPos">
+                 <property name="geometry">
+                  <rect>
+                   <x>196</x>
+                   <y>96</y>
+                   <width>41</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="ChannelPositionsComboBox" name="cboCh2NumSwitchPos">
+                 <property name="geometry">
+                  <rect>
+                   <x>196</x>
+                   <y>176</y>
+                   <width>41</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="ChannelPositionsComboBox" name="cboCh3NumSwitchPos">
+                 <property name="geometry">
+                  <rect>
+                   <x>196</x>
+                   <y>256</y>
+                   <width>41</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="ChannelPositionsComboBox" name="cboCh4NumSwitchPos">
+                 <property name="geometry">
+                  <rect>
+                   <x>196</x>
+                   <y>336</y>
+                   <width>41</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblAuxChannelType">
+                 <property name="geometry">
+                  <rect>
+                   <x>33</x>
+                   <y>60</y>
+                   <width>41</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Type</string>
+                 </property>
+                </widget>
+                <widget class="ChannelTypeComboBox" name="cboChannel5Type">
+                 <property name="geometry">
+                  <rect>
+                   <x>32</x>
+                   <y>416</y>
+                   <width>101</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="ChannelPositionsComboBox" name="cboCh5NumSwitchPos">
+                 <property name="geometry">
+                  <rect>
+                   <x>196</x>
+                   <y>416</y>
+                   <width>41</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_45">
+                 <property name="geometry">
+                  <rect>
+                   <x>12</x>
+                   <y>415</y>
+                   <width>21</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>5</string>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkReversed3">
+                 <property name="geometry">
+                  <rect>
+                   <x>155</x>
+                   <y>256</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkReversed1">
+                 <property name="geometry">
+                  <rect>
+                   <x>155</x>
+                   <y>96</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkReversed2">
+                 <property name="geometry">
+                  <rect>
+                   <x>155</x>
+                   <y>176</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkReversed4">
+                 <property name="geometry">
+                  <rect>
+                   <x>155</x>
+                   <y>336</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_60">
+                 <property name="geometry">
+                  <rect>
+                   <x>144</x>
+                   <y>60</y>
+                   <width>41</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Rev.</string>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkReversed5">
+                 <property name="geometry">
+                  <rect>
+                   <x>155</x>
+                   <y>416</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblAuxChannelType_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>190</x>
+                   <y>60</y>
+                   <width>61</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Positions</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblAuxChannelType_4">
+                 <property name="geometry">
+                  <rect>
+                   <x>280</x>
+                   <y>40</y>
+                   <width>111</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Switch Position</string>
+                 </property>
+                </widget>
+                <widget class="QFrame" name="frame_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>74</y>
+                   <width>1061</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblAuxChannelType_5">
+                 <property name="geometry">
+                  <rect>
+                   <x>330</x>
+                   <y>60</y>
+                   <width>16</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>1</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblAuxChannelType_6">
+                 <property name="geometry">
+                  <rect>
+                   <x>720</x>
+                   <y>60</y>
+                   <width>16</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>4</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblAuxChannelType_7">
+                 <property name="geometry">
+                  <rect>
+                   <x>460</x>
+                   <y>60</y>
+                   <width>16</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>2</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblAuxChannelType_8">
+                 <property name="geometry">
+                  <rect>
+                   <x>590</x>
+                   <y>60</y>
+                   <width>16</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>3</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblAuxChannelType_9">
+                 <property name="geometry">
+                  <rect>
+                   <x>850</x>
+                   <y>60</y>
+                   <width>16</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>5</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblAuxChannelType_10">
+                 <property name="geometry">
+                  <rect>
+                   <x>970</x>
+                   <y>60</y>
+                   <width>16</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>6</string>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh1Pos1">
+                 <property name="geometry">
+                  <rect>
+                   <x>270</x>
+                   <y>96</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh1Pos2">
+                 <property name="geometry">
+                  <rect>
+                   <x>400</x>
+                   <y>96</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh1Pos3">
+                 <property name="geometry">
+                  <rect>
+                   <x>530</x>
+                   <y>96</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh1Pos4">
+                 <property name="geometry">
+                  <rect>
+                   <x>660</x>
+                   <y>96</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblAuxChannelType_3">
+                 <property name="geometry">
+                  <rect>
+                   <x>190</x>
+                   <y>40</y>
+                   <width>61</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Switch</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh1Pos5">
+                 <property name="geometry">
+                  <rect>
+                   <x>790</x>
+                   <y>96</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh1Pos6">
+                 <property name="geometry">
+                  <rect>
+                   <x>920</x>
+                   <y>96</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh1Pos1_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>270</x>
+                   <y>126</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh1Pos1_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>320</x>
+                   <y>126</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh2Pos5">
+                 <property name="geometry">
+                  <rect>
+                   <x>790</x>
+                   <y>176</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh2Pos4">
+                 <property name="geometry">
+                  <rect>
+                   <x>660</x>
+                   <y>176</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh2Pos2">
+                 <property name="geometry">
+                  <rect>
+                   <x>400</x>
+                   <y>176</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh2Pos6">
+                 <property name="geometry">
+                  <rect>
+                   <x>920</x>
+                   <y>176</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh2Pos3">
+                 <property name="geometry">
+                  <rect>
+                   <x>530</x>
+                   <y>176</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh2Pos1">
+                 <property name="geometry">
+                  <rect>
+                   <x>270</x>
+                   <y>176</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh3Pos6">
+                 <property name="geometry">
+                  <rect>
+                   <x>920</x>
+                   <y>256</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh3Pos1">
+                 <property name="geometry">
+                  <rect>
+                   <x>270</x>
+                   <y>256</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh3Pos4">
+                 <property name="geometry">
+                  <rect>
+                   <x>660</x>
+                   <y>256</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh3Pos2">
+                 <property name="geometry">
+                  <rect>
+                   <x>400</x>
+                   <y>256</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh3Pos5">
+                 <property name="geometry">
+                  <rect>
+                   <x>790</x>
+                   <y>256</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh3Pos3">
+                 <property name="geometry">
+                  <rect>
+                   <x>530</x>
+                   <y>256</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh4Pos6">
+                 <property name="geometry">
+                  <rect>
+                   <x>920</x>
+                   <y>336</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh4Pos1">
+                 <property name="geometry">
+                  <rect>
+                   <x>270</x>
+                   <y>336</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh4Pos4">
+                 <property name="geometry">
+                  <rect>
+                   <x>660</x>
+                   <y>336</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh4Pos2">
+                 <property name="geometry">
+                  <rect>
+                   <x>400</x>
+                   <y>336</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh4Pos5">
+                 <property name="geometry">
+                  <rect>
+                   <x>790</x>
+                   <y>336</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh4Pos3">
+                 <property name="geometry">
+                  <rect>
+                   <x>530</x>
+                   <y>336</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh5Pos6">
+                 <property name="geometry">
+                  <rect>
+                   <x>920</x>
+                   <y>416</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh5Pos1">
+                 <property name="geometry">
+                  <rect>
+                   <x>270</x>
+                   <y>416</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh5Pos4">
+                 <property name="geometry">
+                  <rect>
+                   <x>660</x>
+                   <y>416</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh5Pos2">
+                 <property name="geometry">
+                  <rect>
+                   <x>400</x>
+                   <y>416</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh5Pos5">
+                 <property name="geometry">
+                  <rect>
+                   <x>790</x>
+                   <y>416</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SwitchFunctionComboBox" name="cboCh5Pos3">
+                 <property name="geometry">
+                  <rect>
+                   <x>530</x>
+                   <y>416</y>
+                   <width>121</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh1Pos2_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>400</x>
+                   <y>126</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh1Pos2_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>450</x>
+                   <y>126</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh1Pos3_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>530</x>
+                   <y>126</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh1Pos3_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>580</x>
+                   <y>126</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh1Pos4_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>660</x>
+                   <y>126</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh1Pos4_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>710</x>
+                   <y>126</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh1Pos5_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>790</x>
+                   <y>126</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh1Pos5_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>840</x>
+                   <y>126</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh1Pos6_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>920</x>
+                   <y>126</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh1Pos6_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>970</x>
+                   <y>126</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh2Pos1_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>270</x>
+                   <y>206</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh2Pos5_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>790</x>
+                   <y>206</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh2Pos3_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>530</x>
+                   <y>206</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh2Pos2_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>450</x>
+                   <y>206</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh2Pos1_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>320</x>
+                   <y>206</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh2Pos6_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>970</x>
+                   <y>206</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh2Pos3_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>580</x>
+                   <y>206</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh2Pos5_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>840</x>
+                   <y>206</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh2Pos2_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>400</x>
+                   <y>206</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh2Pos4_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>660</x>
+                   <y>206</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh2Pos4_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>710</x>
+                   <y>206</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh2Pos6_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>920</x>
+                   <y>206</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh3Pos4_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>660</x>
+                   <y>286</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh3Pos6_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>920</x>
+                   <y>286</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh3Pos1_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>270</x>
+                   <y>286</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh3Pos6_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>970</x>
+                   <y>286</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh3Pos4_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>710</x>
+                   <y>286</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh3Pos5_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>790</x>
+                   <y>286</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh3Pos5_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>840</x>
+                   <y>286</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh3Pos3_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>530</x>
+                   <y>286</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh3Pos2_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>450</x>
+                   <y>286</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh3Pos2_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>400</x>
+                   <y>286</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh3Pos3_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>580</x>
+                   <y>286</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh3Pos1_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>320</x>
+                   <y>286</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh4Pos4_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>660</x>
+                   <y>366</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh4Pos6_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>920</x>
+                   <y>366</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh4Pos1_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>270</x>
+                   <y>366</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh4Pos6_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>970</x>
+                   <y>366</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh4Pos4_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>710</x>
+                   <y>366</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh4Pos5_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>790</x>
+                   <y>366</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh4Pos5_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>840</x>
+                   <y>366</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh4Pos3_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>530</x>
+                   <y>366</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh4Pos2_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>450</x>
+                   <y>366</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh4Pos2_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>400</x>
+                   <y>366</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh4Pos3_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>580</x>
+                   <y>366</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh4Pos1_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>320</x>
+                   <y>366</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh5Pos4_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>660</x>
+                   <y>446</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh5Pos6_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>920</x>
+                   <y>446</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh5Pos1_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>270</x>
+                   <y>446</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh5Pos6_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>970</x>
+                   <y>446</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh5Pos4_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>710</x>
+                   <y>446</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh5Pos5_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>790</x>
+                   <y>446</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh5Pos5_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>840</x>
+                   <y>446</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh5Pos3_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>530</x>
+                   <y>446</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh5Pos2_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>450</x>
+                   <y>446</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundNumComboBox" name="cboCh5Pos2_SoundNum">
+                 <property name="geometry">
+                  <rect>
+                   <x>400</x>
+                   <y>446</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh5Pos3_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>580</x>
+                   <y>446</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="SoundActionComboBox" name="cboCh5Pos1_Play">
+                 <property name="geometry">
+                  <rect>
+                   <x>320</x>
+                   <y>446</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+                <widget class="QFrame" name="frame_6">
+                 <property name="geometry">
+                  <rect>
+                   <x>250</x>
+                   <y>40</y>
+                   <width>20</width>
+                   <height>441</height>
+                  </rect>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::VLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+               </widget>
+               <widget class="QPushButton" name="cmdTest1">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>490</y>
+                  <width>75</width>
+                  <height>23</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Test 1</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="cmdTest2">
+                <property name="geometry">
+                 <rect>
+                  <x>90</x>
+                  <y>490</y>
+                  <width>75</width>
+                  <height>23</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Test 2</string>
+                </property>
+               </widget>
+              </widget>
+              <widget class="QWidget" name="pgSounds">
+               <widget class="FrameContent" name="frmSoundSettings">
+                <property name="geometry">
+                 <rect>
+                  <x>430</x>
+                  <y>0</y>
+                  <width>411</width>
+                  <height>221</height>
+                 </rect>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::Box</enum>
+                </property>
+                <widget class="HelpButton" name="hpbGeneralSound">
+                 <property name="geometry">
+                  <rect>
+                   <x>380</x>
+                   <y>10</y>
+                   <width>18</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>18</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_55">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>171</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Sounds</string>
+                 </property>
+                </widget>
+                <widget class="QFrame" name="frame_37">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>25</y>
+                   <width>411</width>
+                   <height>16</height>
+                  </rect>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_88">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>40</y>
+                   <width>91</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Throttle stick</string>
+                 </property>
+                </widget>
+                <widget class="QFrame" name="frame_4">
+                 <property name="geometry">
+                  <rect>
+                   <x>50</x>
+                   <y>90</y>
+                   <width>120</width>
+                   <height>80</height>
+                  </rect>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <widget class="QRadioButton" name="radioButton">
+                  <property name="geometry">
+                   <rect>
+                    <x>30</x>
+                    <y>20</y>
+                    <width>82</width>
+                    <height>18</height>
+                   </rect>
+                  </property>
+                  <property name="text">
+                   <string>RadioButton</string>
+                  </property>
+                 </widget>
+                 <widget class="QRadioButton" name="radioButton_2">
+                  <property name="geometry">
+                   <rect>
+                    <x>30</x>
+                    <y>40</y>
+                    <width>82</width>
+                    <height>18</height>
+                   </rect>
+                  </property>
+                  <property name="text">
+                   <string>RadioButton</string>
+                  </property>
+                 </widget>
+                </widget>
+               </widget>
+               <widget class="FrameContent" name="frmVolume">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>0</y>
+                  <width>411</width>
+                  <height>171</height>
+                 </rect>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::Box</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <widget class="QFrame" name="frame_40">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>23</y>
+                   <width>361</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color: #666;</string>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+                <widget class="HelpButton" name="hpbSoundVolumes">
+                 <property name="geometry">
+                  <rect>
+                   <x>330</x>
+                   <y>10</y>
+                   <width>18</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>18</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_159">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>261</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Individual Maximum Volumes</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_162">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>50</y>
+                   <width>131</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Engine</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_163">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>130</y>
+                   <width>131</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Track overlay</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_164">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>90</y>
+                   <width>121</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Effects</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblEngineVolume">
+                 <property name="geometry">
+                  <rect>
+                   <x>300</x>
+                   <y>50</y>
+                   <width>41</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>50%</string>
+                 </property>
+                </widget>
+                <widget class="QSlider" name="sliderEngineVolume">
+                 <property name="geometry">
+                  <rect>
+                   <x>120</x>
+                   <y>54</y>
+                   <width>160</width>
+                   <height>16</height>
+                  </rect>
+                 </property>
+                 <property name="maximum">
+                  <number>100</number>
+                 </property>
+                 <property name="value">
+                  <number>50</number>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="tickPosition">
+                  <enum>QSlider::TicksBelow</enum>
+                 </property>
+                </widget>
+                <widget class="QSlider" name="sliderEffectsVolume">
+                 <property name="geometry">
+                  <rect>
+                   <x>120</x>
+                   <y>94</y>
+                   <width>160</width>
+                   <height>16</height>
+                  </rect>
+                 </property>
+                 <property name="maximum">
+                  <number>100</number>
+                 </property>
+                 <property name="value">
+                  <number>50</number>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="tickPosition">
+                  <enum>QSlider::TicksBelow</enum>
+                 </property>
+                </widget>
+                <widget class="QSlider" name="sliderOverlayVolume">
+                 <property name="geometry">
+                  <rect>
+                   <x>120</x>
+                   <y>134</y>
+                   <width>160</width>
+                   <height>16</height>
+                  </rect>
+                 </property>
+                 <property name="maximum">
+                  <number>100</number>
+                 </property>
+                 <property name="value">
+                  <number>50</number>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="tickPosition">
+                  <enum>QSlider::TicksBelow</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblOverlayVolume">
+                 <property name="geometry">
+                  <rect>
+                   <x>300</x>
+                   <y>130</y>
+                   <width>41</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>50%</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblEffectsVolume">
+                 <property name="geometry">
+                  <rect>
+                   <x>300</x>
+                   <y>90</y>
+                   <width>41</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>50%</string>
+                 </property>
+                </widget>
+               </widget>
+               <widget class="FrameContent" name="frmSqueaks">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>180</y>
+                  <width>411</width>
+                  <height>331</height>
+                 </rect>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::Box</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <widget class="QFrame" name="frame_42">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>23</y>
+                   <width>411</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color: #666;</string>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+                <widget class="HelpButton" name="hpbSoundSqueaks">
+                 <property name="geometry">
+                  <rect>
+                   <x>380</x>
+                   <y>10</y>
+                   <width>18</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>18</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_175">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>181</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Squeak Settings</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak3Max">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>166</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSqueak1">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>104</y>
+                   <width>91</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Squeak 1</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak1Min">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>106</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSqueakHeader4">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>76</y>
+                   <width>71</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Min</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak3Min">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>166</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblMinSqueakSpeed2">
+                 <property name="geometry">
+                  <rect>
+                   <x>300</x>
+                   <y>284</y>
+                   <width>21</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>%</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak1Max">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>106</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak5Min">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>224</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSqueakHeader3">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>54</y>
+                   <width>161</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Interval (mS)</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkEnableSqueak5">
+                 <property name="geometry">
+                  <rect>
+                   <x>180</x>
+                   <y>227</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak5Max">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>224</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
+                </widget>
+                <widget class="QFrame" name="frmSqueakHeader1">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>66</y>
+                   <width>171</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblMinSqueakSpeed1">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>284</y>
+                   <width>201</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Minimum speed before squeaking</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak2Max">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>136</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSqueak5">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>224</y>
+                   <width>91</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Squeak 5</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak4Max">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>194</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak6Min">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>254</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSqueak2">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>136</y>
+                   <width>91</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Squeak 2</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak2Min">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>136</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkEnableSqueak3">
+                 <property name="geometry">
+                  <rect>
+                   <x>180</x>
+                   <y>167</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak6Max">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>254</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkEnableSqueak1">
+                 <property name="geometry">
+                  <rect>
+                   <x>180</x>
+                   <y>107</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSqueak3">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>166</y>
+                   <width>91</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Squeak 3</string>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkEnableSqueak4">
+                 <property name="geometry">
+                  <rect>
+                   <x>180</x>
+                   <y>197</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkEnableSqueak2">
+                 <property name="geometry">
+                  <rect>
+                   <x>180</x>
+                   <y>137</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak4Min">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>194</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSqueakHeader5">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>76</y>
+                   <width>61</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Max</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinMinSqueakSpeed">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>284</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>100</number>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSqueakHeader2">
+                 <property name="geometry">
+                  <rect>
+                   <x>163</x>
+                   <y>76</y>
+                   <width>51</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Enabled</string>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkEnableSqueak6">
+                 <property name="geometry">
+                  <rect>
+                   <x>180</x>
+                   <y>256</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSqueak4">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>194</y>
+                   <width>91</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Squeak 4</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSqueak6">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>254</y>
+                   <width>91</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Squeak 6</string>
+                 </property>
+                </widget>
+                <widget class="QFrame" name="frmSqueakHeader2">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>90</y>
+                   <width>391</width>
+                   <height>16</height>
+                  </rect>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+               </widget>
+              </widget>
+              <widget class="QWidget" name="pgFirmware">
+               <widget class="FrameContent" name="frmFlash">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>0</y>
+                  <width>471</width>
+                  <height>131</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::Box</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <widget class="QFrame" name="frame_36">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>23</y>
+                   <width>471</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color: #666;</string>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_128">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>171</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>MS Shell Dlg 2</family>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Update Firmware</string>
+                 </property>
+                </widget>
+                <widget class="HelpButton" name="hpbFirmware">
+                 <property name="geometry">
+                  <rect>
+                   <x>440</x>
+                   <y>10</y>
+                   <width>18</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>18</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_140">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>40</y>
+                   <width>111</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Select Hex File</string>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="cmdFlashHex">
+                 <property name="geometry">
+                  <rect>
+                   <x>400</x>
+                   <y>100</y>
+                   <width>61</width>
+                   <height>23</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Flash</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="cmdLocalHexPicker">
+                 <property name="geometry">
+                  <rect>
+                   <x>360</x>
+                   <y>40</y>
+                   <width>101</width>
+                   <height>23</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Use your own Hex</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="cmdWebHexPicker">
+                 <property name="geometry">
+                  <rect>
+                   <x>240</x>
+                   <y>40</y>
+                   <width>111</width>
+                   <height>23</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Get Latest Release</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblHexVersion">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>100</y>
+                   <width>351</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Version: </string>
+                 </property>
+                </widget>
+                <widget class="QLineEdit" name="ltxtHexPath">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>70</y>
+                   <width>451</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="readOnly">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </widget>
+               <widget class="FrameContent" name="frmConsole">
+                <property name="geometry">
+                 <rect>
+                  <x>490</x>
+                  <y>0</y>
+                  <width>351</width>
+                  <height>131</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::Box</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <widget class="QFrame" name="frame_38">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>23</y>
+                   <width>351</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color: #666;</string>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_149">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>91</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>MS Shell Dlg 2</family>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Console</string>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="cmdSnoop">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>100</y>
+                   <width>91</width>
+                   <height>23</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Snoop</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>40</y>
+                   <width>351</width>
+                   <height>51</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>You may use the window below as a console to view the output from any serial device connected to the COM port selected above. (TCB default baud rate is 115,200)</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="cmdClearConsole">
+                 <property name="geometry">
+                  <rect>
+                   <x>140</x>
+                   <y>100</y>
+                   <width>91</width>
+                   <height>23</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Clear Screen</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkAutoscroll">
+                 <property name="geometry">
+                  <rect>
+                   <x>260</x>
+                   <y>102</y>
+                   <width>71</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>Autoscroll</string>
+                 </property>
+                </widget>
+                <widget class="HelpButton" name="hpbConsole">
+                 <property name="geometry">
+                  <rect>
+                   <x>320</x>
+                   <y>10</y>
+                   <width>18</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>18</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </widget>
+               <widget class="QTextEdit" name="txtConsole">
+                <property name="geometry">
+                 <rect>
+                  <x>11</x>
+                  <y>140</y>
+                  <width>831</width>
+                  <height>371</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Courier</family>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QTextEdit {
+	background: #454F65;
+	color: #FFF;
+}
+
+/* Scroll area */
+QScrollBar:vertical {
+     border: 0; /*1px solid #808080; */
+     background: #E1E3E3;	/* light grey */
+     width: 17px;
+     margin: 20px 0 20px 0;
+ }
+/* Scroll handle */
+QScrollBar::handle:vertical {
+	border: 1px solid grey;
+     background: #454F65; /* Dark purple grey */
+     min-height: 20px;
+ }
+
+/* The up-arrow area */
+QScrollBar::sub-line:vertical {
+     border: 1px solid grey;
+     background: #454F65;
+     height: 16px;
+     subcontrol-position: top;
+     subcontrol-origin: margin;
+ }
+
+/* The down-arrow area */
+QScrollBar::add-line:vertical {
+     border: 1px solid grey;
+     background: #454F65;
+     height: 16px;
+     subcontrol-position: bottom;
+     subcontrol-origin: margin;
+ }
+
+QScrollBar::up-arrow:vertical {
+	image: url(:/images/consoleuparrow.png);
+ }
+
+/* Yes, we swap arrows when pressed. It looks cool. */
+/* And for some reason we weren't able to change the background color, */
+/* which is all we really wanted to do. */
+QScrollBar::up-arrow:vertical:pressed {
+ 	image: url(:/images/consoledownarrow.png);
+ }
+
+QScrollBar::down-arrow:vertical {
+	image: url(:/images/consoledownarrow.png);
+}
+
+QScrollBar::down-arrow:vertical:pressed {
+	image: url(:/images/consoleuparrow.png);
+}
+
+/* No idea what this is */
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+     background: none;
+ }</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOn</enum>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="cmdRefreshCOMs">
+                <property name="geometry">
+                 <rect>
+                  <x>900</x>
+                  <y>120</y>
+                  <width>21</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>14</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               <widget class="QComboBox" name="cboCOMPorts">
+                <property name="geometry">
+                 <rect>
+                  <x>930</x>
+                  <y>120</y>
+                  <width>101</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>22</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+               </widget>
+               <widget class="BaudRateComboBox" name="cboConsoleBaud">
+                <property name="geometry">
+                 <rect>
+                  <x>950</x>
+                  <y>150</y>
+                  <width>81</width>
+                  <height>22</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>22</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </widget>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>12</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">    background: #C1CADE;
+    background: #A6B5C8;
+    background: #E1E3E3;</string>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Plain</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QFrame" name="frmWorkBottom">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>8</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">    background: #A6B5C8;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+    background: #E1E3E3;</string>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="QFrame" name="frmTopSpacer">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>8</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: #E1E3E3;</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1251</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="font">
+     <font>
+      <family>MS Shell Dlg 2</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpenFile"/>
+    <addaction name="actionSaveFile"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="font">
+     <font>
+      <family>MS Shell Dlg 2</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionHelp_Contents"/>
+    <addaction name="actionCheck_for_Updates"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout_OP_Config"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionResetAllVals"/>
+    <addaction name="separator"/>
+    <addaction name="actionShowHeader"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpenFile">
+   <property name="text">
+    <string>Import Settings</string>
+   </property>
+   <property name="iconText">
+    <string>Import Settings</string>
+   </property>
+   <property name="toolTip">
+    <string>Import Settings from OPZ file</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="actionSaveFile">
+   <property name="text">
+    <string>Save Settings to File</string>
+   </property>
+   <property name="toolTip">
+    <string>Save Settings to OPZ File</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionWrite">
+   <property name="text">
+    <string>Write Settings to Device</string>
+   </property>
+  </action>
+  <action name="actionRead">
+   <property name="text">
+    <string>Read Settings from Device</string>
+   </property>
+  </action>
+  <action name="actionConnect">
+   <property name="text">
+    <string>Connect</string>
+   </property>
+  </action>
+  <action name="actionDisconnect">
+   <property name="text">
+    <string>Disconnect</string>
+   </property>
+  </action>
+  <action name="actionHelp_Contents">
+   <property name="text">
+    <string>Help Contents</string>
+   </property>
+  </action>
+  <action name="actionCheck_for_Updates">
+   <property name="text">
+    <string>Check for Updates</string>
+   </property>
+  </action>
+  <action name="actionAbout_OP_Config">
+   <property name="text">
+    <string>About OP Sound</string>
+   </property>
+  </action>
+  <action name="actionResetAllVals">
+   <property name="text">
+    <string>Reset All Values to Default</string>
+   </property>
+  </action>
+  <action name="actionShowHeader">
+   <property name="text">
+    <string>Show/Hide header</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>HelpButton</class>
+   <extends>QPushButton</extends>
+   <header location="global">helpbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>BaudRateComboBox</class>
+   <extends>QComboBox</extends>
+   <header location="global">combo_baudrates.h</header>
+  </customwidget>
+  <customwidget>
+   <class>FrameContent</class>
+   <extends>QFrame</extends>
+   <header location="global">framecontent.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ChannelTypeComboBox</class>
+   <extends>QComboBox</extends>
+   <header location="global">combo_channeltype.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ChannelPositionsComboBox</class>
+   <extends>QComboBox</extends>
+   <header location="global">combo_channelpositions.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SwitchFunctionComboBox</class>
+   <extends>QComboBox</extends>
+   <header location="global">combo_switchfunctions.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SoundNumComboBox</class>
+   <extends>QComboBox</extends>
+   <header location="global">combo_soundnum.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SoundActionComboBox</class>
+   <extends>QComboBox</extends>
+   <header location="global">combo_soundaction.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>cmdRefreshCOMs</tabstop>
+  <tabstop>cboCOMPorts</tabstop>
+  <tabstop>cboConsoleBaud</tabstop>
+  <tabstop>hpbRadio</tabstop>
+  <tabstop>cboChannel1Type</tabstop>
+  <tabstop>cboCh1NumSwitchPos</tabstop>
+  <tabstop>chkReversed1</tabstop>
+  <tabstop>cboChannel2Type</tabstop>
+  <tabstop>cboCh2NumSwitchPos</tabstop>
+  <tabstop>chkReversed2</tabstop>
+  <tabstop>cboChannel3Type</tabstop>
+  <tabstop>cboCh3NumSwitchPos</tabstop>
+  <tabstop>chkReversed3</tabstop>
+  <tabstop>cboChannel4Type</tabstop>
+  <tabstop>cboCh4NumSwitchPos</tabstop>
+  <tabstop>chkReversed4</tabstop>
+  <tabstop>cboChannel5Type</tabstop>
+  <tabstop>cboCh5NumSwitchPos</tabstop>
+  <tabstop>chkReversed5</tabstop>
+  <tabstop>cmdTest1</tabstop>
+  <tabstop>cmdTest2</tabstop>
+  <tabstop>listViewWest</tabstop>
+  <tabstop>hpbGeneralSound</tabstop>
+  <tabstop>hpbFirmware</tabstop>
+  <tabstop>cmdWebHexPicker</tabstop>
+  <tabstop>cmdLocalHexPicker</tabstop>
+  <tabstop>ltxtHexPath</tabstop>
+  <tabstop>cmdFlashHex</tabstop>
+  <tabstop>hpbConsole</tabstop>
+  <tabstop>cmdSnoop</tabstop>
+  <tabstop>cmdClearConsole</tabstop>
+  <tabstop>chkAutoscroll</tabstop>
+  <tabstop>txtConsole</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
