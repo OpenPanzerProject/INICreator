@@ -1,0 +1,100 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Sound Settings</title>
+	<link rel="stylesheet" type="text/css" href="opconfighelp.css">
+</head>
+
+
+<body>
+
+	<div id="toc">
+		<h3>Topics</h3>
+		<ul>
+            <li><a href="#general">General Sound Settings</a></li>
+			<li><a href="#squeaks">Squeak Settings</a></li>
+            <li><a href="#volumes">Individual Maximum Volumes</a></li>
+		</ul>
+	</div>
+		
+	<h1>Sound Settings</h1>
+	
+	<h2>Sound Device Selection</h2>
+	<p>
+	The TCB is compatible with multiple sound cards including the Benedini Mini and Micro, Taigen standalone cards, and the 
+    Open Panzer Sound Card. Each card will have different capabilities and options. 
+
+	For details on card-specific features, and instructions for connecting your card to the TCB, please see the 
+	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:sound">Open Panzer Wiki - Sound</a> page.
+    </p>
+
+	<h2 id="general">General Sound Settings</h2>
+	
+	<h4 class="entry">Enable Turret Sound</h4>
+	<p>
+	Check this option to enable the turret rotation sound, uncheck to disable. Only available for sound cards with a turret sound. 
+	</p>
+	
+	<h4 class="entry">Enable Barrel Sound</h4>
+	<p>
+	Check this option to enable the barrel rotation sound, uncheck to disable. Only available for sound cards with a barrel sound.
+	</p>
+	
+	<h4 class="entry">Enable Headlight Sound</h4>
+	<p>
+	Check this option to automatically play the Headlight (Switch) On/Off sound whenever any trigger turns on or off the headlights (Light 1). 
+    Only available for sound cards with a headlight sound. 
+	</p>
+
+    
+    
+	<h2 id="squeaks">Squeak Settings</h2>
+	<p>
+	Squeaks are experimental. The TCB allows up to 6 squeak sounds to be played at various intervals, although not all cards will support these sounds.
+    </p>
+    
+    <p></p>
+    When the vehicle is moving, the TCB will trigger each squeak randomly within certain time windows that
+	you can adjust. To understand how the random trigger works, let's take an example. Suppose we set the Minimum time interval for Squeak 2 to 2000 mS (2 seconds) and the 
+    Maximum time interval to 5000 mS (5 seconds). The TCB will pick a random length of time that is at least 2 seconds but no more than 5 seconds. It will wait for this
+	random length of time, and when that time is up, it will play the Squeak 2 sound. Then it will select a new random length of time that again can be any value at least
+	2 seconds long but no longer than 5 seconds. In other words, the Minimum interval is the minimum length of time that will ever pass before a squeak repeats itself while the 
+	Maximum interval is the maximum length of time before a squeak will repeat itself; but the actual length of time between those two extremes is selected at random.<br><br>
+	
+	This random selection process continues for all enabled squeaks simultaneously so long as the vehicle is moving. 
+	</p>
+
+	<h4 class="entry">Enabled, Min, Max</h4>
+	<p>
+	Enable or disable each squeak, and set a minimum and maximum interval for it to repeat. 
+	</p>
+	
+	<h4 class="entry">Minimum Speed Before Squeaking</h4>
+	<p>
+	Set the minimum vehicle speed that must be reached before the random squeaking process can begin. It can sound unrealistic if your tank has barely started moving and already it is 
+	squeaking.
+	</p>
+
+	<h2 id="volumes">Individual Maximum Volumes</h2>
+	<p>
+	When paired with the Open Panzer sound card, you are given the option to adjust the maximum volumes of individual sound categories. Completely aside from the settings here you are still able to 
+    adjust <i>absolute</i> or <i>master</i> volume, but that will be done either with the physical potentiometer attached to your sound card, or remotely when you have mapped the special function
+    "Set Volume" to a channel on your radio.
+    </p>
+    
+    <p>
+    The volume adjustments here allow you to adjust the maximum volumes of individual categories. Note that if the ratios sum more than 100% you may hear distortion when playing multiple sounds at 
+    once. For example, if you set maximum Engine volume to 80% and maximum Effects volume to 60%, the combined total would equal 140% when the master volume is set to 100%. This will create distortion 
+    if for example you play the machine gun sound (an effect) while the engine is running, unless you operate at less than 100% master volume or modify the ratios. 
+    </p>
+
+<br />
+<br />
+<br />
+
+</body>
+
+</html>
+
+
