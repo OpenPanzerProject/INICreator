@@ -1,0 +1,38 @@
+#ifndef OP_DEVICEDATA_STRUCT
+#define OP_DEVICEDATA_STRUCT
+
+#include <arduino_compat.h>         // Gives us Arduino-like data type names
+#include <op_defines.h>
+
+// This struct is similiar to the _eeprom_data struct in Arduino, but not exactly!
+// We include a few more things here than there. These are all settings we might be interested
+// in reading from the device, not just things the device stores in EEPROM. (For example, we might want
+// to know the current throttle stick position, but that is not a setting the device stores in EEPROM)
+//--------------------------------------------------------------------------------------------------------------------------------------->>
+struct _device_data {
+// First Var
+    uint8_t FirstVar;
+
+// Channel settings
+    channel_settings RCChannel[CHANNELS];        // Create CHANNELS number of type channel_settings
+
+// Sound settings
+    squeak_settings Squeak[NUM_SQUEAKS];
+    uint8_t	 MinSqueakSpeedPct;					 // Prevent squeaks from occuring when vehicle is moving slower than this percent of movement
+    boolean  HeadlightSound_Enabled;			 // Is the headlight sound enabled or not
+    boolean  TurretSound_Enabled;				 // Is turret rotation sound enabled or not
+    boolean  BarrelSound_Enabled;                // Is barrel elevation sound enabled or not
+
+    uint8_t  VolumeEngine;                       // Relative, not absolute volumes
+    uint8_t  VolumeTrackOverlay;                 // Relative, not absolute volumes
+    uint8_t  VolumeEffects;                      // Relative, not absolute volumes
+
+// Program setting
+    boolean PrintDebug;							 // If true, TCB will print debugging messages out the DebugSerial serial port
+
+// Marker
+    uint32_t InitStamp;       		 		     //
+};
+
+
+#endif	// Define OP_DEVICEDATA_STRUCT
