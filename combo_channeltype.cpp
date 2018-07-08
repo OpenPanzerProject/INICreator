@@ -9,17 +9,17 @@ void ChannelTypeComboBox::setType(int channel)
     switch (channel)
     {
         case 1:
-        this->insertItem(0, "Switch", CF_SWITCH);
-        this->insertItem(1, "Engine Speed", CF_ENGINE_SPEED);
+        this->insertItem(0, "Switch", CT_SWITCH);
+        this->insertItem(1, "Engine Speed", CT_ENGINE_SPEED);
         break;
 
         case 5:
-        this->insertItem(0, "Switch", CF_SWITCH);
-        this->insertItem(1, "Volume", CF_VOLUME);
+        this->insertItem(0, "Switch", CT_SWITCH);
+        this->insertItem(1, "Volume", CT_VOLUME);
         break;
 
         default:
-        this->insertItem(0, "Switch", CF_SWITCH);
+        this->insertItem(0, "Switch", CT_SWITCH);
     }
 
 
@@ -35,7 +35,7 @@ void ChannelTypeComboBox::ChannelTypeChangedSlot(const QString )
 }
 
 // This returns the current actual channel_function
-channel_function ChannelTypeComboBox::getCurrentChannelFunction(void)
+channel_type ChannelTypeComboBox::getCurrentChannelType(void)
 {
-    return channel_function(this->currentData().toInt());
+    return channel_type(this->currentData().toInt());
 }

@@ -11,7 +11,7 @@ class ChannelTypeComboBox : public QComboBox
 public:
     ChannelTypeComboBox(QWidget *parent = 0);
     void setType(int);
-    channel_function getCurrentChannelFunction(void);
+    channel_type getCurrentChannelType(void);
 
 private slots:
   void ChannelTypeChangedSlot(const QString);
