@@ -8,11 +8,9 @@ SwitchFunctionComboBox::SwitchFunctionComboBox(QWidget *parent) : QComboBox(pare
     this->insertItem(2, "Stop Engine", SF_ENGINE_STOP);
     this->insertItem(3, "Toggle Engine", SF_ENGINE_TOGGLE);
     this->insertItem(4, "Cannon Fire", SF_CANNON_FIRE);
-    this->insertItem(5, "MG - Start", SF_MG_FIRE);
-    this->insertItem(6, "MG - Stop", SF_MG_STOP);
-    this->insertItem(7, "MG 2 - Start", SF_MG2_FIRE);
-    this->insertItem(8, "MG 2 - Stop", SF_MG2_STOP);
+    this->insertItem(5, "Machine Gun", SF_MG);
     this->insertItem(9, "User Sound", SF_USER);
+    this->insertItem(10,"Light", SF_LIGHT);
 
 
     // Connect to my custom signal

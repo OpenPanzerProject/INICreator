@@ -7,59 +7,64 @@ void MainWindow::loadVariableDefaults(void)
     for (int i = 0; i < CHANNELS; i++)
     {
         DeviceData.RCChannel[i].Digital = true;
-        DeviceData.RCChannel[i].chFunction = CF_SWITCH;
+        DeviceData.RCChannel[i].chType = CT_SWITCH;
         DeviceData.RCChannel[i].numPositions = 2;
         DeviceData.RCChannel[i].reversed = false;
         for (int j = 0; j < MAX_SWITCH_POSITIONS; j++)
         {
             DeviceData.RCChannel[i].swFunctionID[j] = SF_NULL;          // Raw ID
             DeviceData.RCChannel[i].swFunction[j] = SF_NULL;            // Actual function
-            DeviceData.RCChannel[i].userSoundNum[j] = 0;
-            DeviceData.RCChannel[i].userSoundAction[j] = SOUND_STOP;
+            DeviceData.RCChannel[i].actionNum[j] = 0;
+            DeviceData.RCChannel[i].switchAction[j] = ACTION_OFFSTOP;
         }
     }
 
     // Channel 1 - Engine speed
     DeviceData.RCChannel[0].Digital = false;
-    DeviceData.RCChannel[0].chFunction = CF_ENGINE_SPEED;
+    DeviceData.RCChannel[0].chType = CT_ENGINE_SPEED;
 
     // Channel 2 - start and stop engine
     DeviceData.RCChannel[1].numPositions = 3;
     // Position 1
-    DeviceData.RCChannel[1].swFunctionID[0] = 1001;             // Raw ID
+    DeviceData.RCChannel[1].swFunctionID[0] = 10000;            // Raw ID
     DeviceData.RCChannel[1].swFunction[0] = SF_ENGINE_START;    // Actual function
     // Position 3
-    DeviceData.RCChannel[1].swFunctionID[2] = 1002;             // Raw ID
+    DeviceData.RCChannel[1].swFunctionID[2] = 20000;            // Raw ID
     DeviceData.RCChannel[1].swFunction[2] = SF_ENGINE_STOP;     // Actual function
 
     // Channel 3 - Cannon and MG
     DeviceData.RCChannel[2].numPositions = 3;
     // Position 1
-    DeviceData.RCChannel[2].swFunctionID[0] = 1004;             // Raw ID
+    DeviceData.RCChannel[2].swFunctionID[0] = 40001;            // Raw ID
     DeviceData.RCChannel[2].swFunction[0] = SF_CANNON_FIRE;     // Actual function
-    // Position 2
-    DeviceData.RCChannel[2].swFunctionID[1] = 1006;             // Raw ID
-    DeviceData.RCChannel[2].swFunction[1] = SF_MG_STOP;         // Actual function
+    DeviceData.RCChannel[2].actionNum[0] = 1;                   // Cannon 1
+    // Position 2                                            // Center position
+    DeviceData.RCChannel[2].swFunctionID[1] = 50202;            // Raw ID
+    DeviceData.RCChannel[2].swFunction[1] = SF_MG;              // Actual function
+    DeviceData.RCChannel[2].actionNum[1] = 2;                   // MG 2
+    DeviceData.RCChannel[2].switchAction[1] = ACTION_OFFSTOP;   // Stop playing the MG
     // Position 3
-    DeviceData.RCChannel[2].swFunctionID[2] = 1005;             // Raw ID
-    DeviceData.RCChannel[2].swFunction[2] = SF_MG_FIRE;         // Actual function
+    DeviceData.RCChannel[2].swFunctionID[2] = 50102;            // Raw ID
+    DeviceData.RCChannel[2].swFunction[2] = SF_MG;              // Actual function
+    DeviceData.RCChannel[2].actionNum[2] = 2;                   // MG 2
+    DeviceData.RCChannel[2].switchAction[2] = ACTION_ONSTART;   // Start playing the MG
 
     // Channel 4 - play user sound 1 and 2
     DeviceData.RCChannel[3].numPositions = 3;
     // Position 1
-    DeviceData.RCChannel[3].swFunctionID[0] = 11;               // Raw ID
+    DeviceData.RCChannel[3].swFunctionID[0] = 70101;            // Raw ID
     DeviceData.RCChannel[3].swFunction[0] = SF_USER;            // Actual function
-    DeviceData.RCChannel[3].userSoundNum[0] = 1;
-    DeviceData.RCChannel[3].userSoundAction[0] = SOUND_PLAY;
+    DeviceData.RCChannel[3].actionNum[0] = 1;
+    DeviceData.RCChannel[3].switchAction[0] = ACTION_ONSTART;
     // Position 3
-    DeviceData.RCChannel[3].swFunctionID[2] = 21;               // Raw ID
+    DeviceData.RCChannel[3].swFunctionID[2] = 70102;            // Raw ID
     DeviceData.RCChannel[3].swFunction[2] = SF_USER;            // Actual function
-    DeviceData.RCChannel[3].userSoundNum[2] = 2;
-    DeviceData.RCChannel[3].userSoundAction[2] = SOUND_PLAY;
+    DeviceData.RCChannel[3].actionNum[2] = 2;
+    DeviceData.RCChannel[3].switchAction[2] = ACTION_ONSTART;
 
     // Channel 5 - Volume
     DeviceData.RCChannel[4].Digital = false;
-    DeviceData.RCChannel[4].chFunction = CF_VOLUME;
+    DeviceData.RCChannel[4].chType = CT_VOLUME;
 
     // Squeak Defaults
     DeviceData.Squeak[0].MinInterval_mS = 1500;
@@ -81,8 +86,41 @@ void MainWindow::loadVariableDefaults(void)
     DeviceData.VolumeEngine = 50;
     DeviceData.VolumeTrackOverlay = 50;
     DeviceData.VolumeEffects = 50;
+
+    // Throttle position
+    DeviceData.centerThrottle = true;
+
+    // Lights
+    DeviceData.Light1FlashTime_mS = 30;
+    DeviceData.Light1BlinkOnTime_mS = 30;
+    DeviceData.Light1BlinkOffTime_mS = 30;
+    DeviceData.Light2FlashTime_mS = 30;
+    DeviceData.Light2BlinkOnTime_mS = 30;
+    DeviceData.Light2BlinkOffTime_mS = 30;
+    DeviceData.Light3FlashTime_mS = 30;
+    DeviceData.Light3BlinkOnTime_mS = 30;
+    DeviceData.Light3BlinkOffTime_mS = 30;
+
+    // Servo
+    DeviceData.ServoReversed = false;
+    DeviceData.ServoTimeToRecoil = 200;
+    DeviceData.ServoTimeToReturn = 800;
+    DeviceData.ServoEndPointRecoiled = 100;
+    DeviceData.ServoEndPointBattery = 100;
+
+    // Engine
+    DeviceData.EngineAutoStart = false;
+    DeviceData.EngineAutoStopTime_mS = 0;
 }
 
+
+//------------------------------------------------------------------------------------------------------------------------>>
+// UTILITY - Create a function ID from switch function, switch action, and action number
+//------------------------------------------------------------------------------------------------------------------------>>
+uint32_t MainWindow::switchSettingsToID(switch_function sf, switch_action sa, uint8_t num)
+{
+    return ((multiplier_switchfunction * sf) + (multiplier_switchaction * sa) + num);
+}
 
 //------------------------------------------------------------------------------------------------------------------------>>
 // FILE - READING AND WRITING
@@ -90,7 +128,8 @@ void MainWindow::loadVariableDefaults(void)
 // This is just the Device menu action, and we simply get a file path/name from the user, then pass it to the actual reading function
 void MainWindow::actionReadSettingsFromFile()
 {
-    QString filename = QFileDialog::getOpenFileName(this, tr("Import Settings from INI File"), ".", tr("INI files (*.ini)"));
+    const QString desktopFolder = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+    QString filename = QFileDialog::getOpenFileName(this, tr("Import Settings from INI File"), desktopFolder, tr("INI files (*.ini)"));
 
     if (filename == "") return;     // Exit if they cancel
     else readSettingsFromFile(filename, false);
@@ -122,19 +161,19 @@ void MainWindow::readSettingsFromFile(QString filename, boolean confirm)
     for (int i = 0; i < CHANNELS; i++)
     {
         DeviceData.RCChannel[i].Digital = true;
-        DeviceData.RCChannel[i].chFunction = CF_SWITCH;
+        DeviceData.RCChannel[i].chType = CT_SWITCH;
         DeviceData.RCChannel[i].numPositions = 2;
         DeviceData.RCChannel[i].reversed = false;
         for (int j = 0; j < MAX_SWITCH_POSITIONS; j++)
         {
             DeviceData.RCChannel[i].swFunctionID[j] = SF_NULL;          // Raw ID
             DeviceData.RCChannel[i].swFunction[j] = SF_NULL;            // Actual function
-            DeviceData.RCChannel[i].userSoundNum[j] = 0;
-            DeviceData.RCChannel[i].userSoundAction[j] = SOUND_STOP;
+            DeviceData.RCChannel[i].actionNum[j] = 0;
+            DeviceData.RCChannel[i].switchAction[j] = ACTION_OFFSTOP;
         }
     }
 
-    // Load channel function
+    // Channel function
     // -------------------------------------------------------------------------------------------------------------->>
     settings.beginGroup("channel_func");
     keys = settings.childKeys();
@@ -151,12 +190,12 @@ void MainWindow::readSettingsFromFile(QString filename, boolean confirm)
         if (ch >= 0 and ch < CHANNELS)
         {
             DeviceData.RCChannel[ch].Digital = !static_cast<bool>(settings.value(key, 0).toUInt());
-            DeviceData.RCChannel[ch].chFunction = static_cast<channel_function>(settings.value(key,0).toUInt());
+            DeviceData.RCChannel[ch].chType = static_cast<channel_type>(settings.value(key,0).toUInt());
         }
     }
     settings.endGroup();
 
-    // Load channel reversed
+    // Channel reversed
     // -------------------------------------------------------------------------------------------------------------->>
     settings.beginGroup("channel_reversed");
     keys = settings.childKeys();
@@ -177,7 +216,7 @@ void MainWindow::readSettingsFromFile(QString filename, boolean confirm)
     }
     settings.endGroup();
 
-    // Load switch position counts for switch channels
+    // Switch position counts for switch channels
     // -------------------------------------------------------------------------------------------------------------->>
     settings.beginGroup("channel_pos_count");
     keys = settings.childKeys();
@@ -208,7 +247,7 @@ void MainWindow::readSettingsFromFile(QString filename, boolean confirm)
     }
     settings.endGroup();
 
-    // Load switch functions
+    // Switch functions
     // -------------------------------------------------------------------------------------------------------------->>
     settings.beginGroup("channel_pos_triggers");
     keys = settings.childKeys();
@@ -227,35 +266,24 @@ void MainWindow::readSettingsFromFile(QString filename, boolean confirm)
         // Only if this channel is a switch with number of positions at least as high as this position
         if (DeviceData.RCChannel[ch].Digital && DeviceData.RCChannel[ch].numPositions >= pos)
         {   // Now unpack the function ID which will be the value associated with this key
-            int func = settings.value(key).toInt();
+            int32_t funcID = settings.value(key).toInt();
             // We need position to be zero-based from here on
             pos -= 1;
             // Save function ID (raw number)
-            DeviceData.RCChannel[ch].swFunctionID[pos] = func;
-
-            // For convenience later, if this function is a play-user-sound function let's unpack the ID into the
-            // component parts (sound number, sound action)
-            if (func <= function_id_usersound_max_range)
-            {
-                DeviceData.RCChannel[ch].swFunction[pos] = SF_USER;       // Fhis function is a user sound command
-                uint16_t num = func / function_id_usersound_multiplier;
-                uint8_t action = func - (num * function_id_usersound_multiplier);
-                DeviceData.RCChannel[ch].userSoundNum[pos] = num;
-                // Action can only be 1-3 (play, repeat, stop)
-                if (action < 1) action = 1;
-                if (action > 3) action = 3;
-                DeviceData.RCChannel[ch].userSoundAction[pos] = static_cast<sound_action>(action);
-                // qDebug() << "User sound " << num << " action - " << action;
-            }
-            else if (func >= function_id_other_function_start_range)
-            {   // This is not a user function but some other
-                DeviceData.RCChannel[ch].swFunction[pos] = static_cast<switch_function>(func - function_id_other_function_start_range);
-            }
+            DeviceData.RCChannel[ch].swFunctionID[pos] = funcID;
+            // Now unpack the function ID into its component parts (function, action, action number)
+            uint16_t func = (funcID / multiplier_switchfunction);
+            DeviceData.RCChannel[ch].swFunction[pos] = static_cast<switch_function>(func); // Switch function
+            uint8_t act = (funcID - (func * multiplier_switchfunction)) / multiplier_switchaction;
+            DeviceData.RCChannel[ch].switchAction[pos] = static_cast<switch_action>(act);
+            uint8_t num = (funcID - (func * multiplier_switchfunction) - (act * multiplier_switchaction));
+            DeviceData.RCChannel[ch].actionNum[pos] = num;
+            // qDebug() << "Channel " << ch + 1 << " Switch Position " << pos + 1 << " Function " << func << " action " << act << " number " << num;
         }
     }
     settings.endGroup();
 
-    // Load squeak settings
+    // Squeak settings
     // -------------------------------------------------------------------------------------------------------------->>
     settings.beginGroup("squeak_settings");
     keys = settings.childKeys();
@@ -274,7 +302,7 @@ void MainWindow::readSettingsFromFile(QString filename, boolean confirm)
     }
     settings.endGroup();
 
-    // Load volumes
+    // Volumes
     // -------------------------------------------------------------------------------------------------------------->>
     settings.beginGroup("volumes");
     keys = settings.childKeys();
@@ -286,6 +314,64 @@ void MainWindow::readSettingsFromFile(QString filename, boolean confirm)
         if (key == "overlay")   DeviceData.VolumeTrackOverlay = settings.value(key, 0).toInt();;
     }
     settings.endGroup();
+
+    // Throttle
+    // -------------------------------------------------------------------------------------------------------------->>
+    settings.beginGroup("throttle");
+    keys = settings.childKeys();
+    for (int i = 0; i < keys.size(); ++i)
+    {
+        QString key = keys.at(i).toLocal8Bit().constData();
+        if (key == "centerthrottle") DeviceData.centerThrottle = settings.value(key, 0).toBool();
+    }
+    settings.endGroup();
+
+    // Lights
+    // -------------------------------------------------------------------------------------------------------------->>
+    settings.beginGroup("lights");
+    keys = settings.childKeys();
+    for (int i = 0; i < keys.size(); ++i)
+    {
+        QString key = keys.at(i).toLocal8Bit().constData();
+        if (key == "l1_flash")      DeviceData.Light1FlashTime_mS  = settings.value(key, 0).toUInt();
+        if (key == "l1_blinkon")    DeviceData.Light1BlinkOnTime_mS = settings.value(key, 0).toUInt();
+        if (key == "l1_blinkoff")   DeviceData.Light1BlinkOffTime_mS = settings.value(key, 0).toUInt();
+        if (key == "l2_flash")      DeviceData.Light2FlashTime_mS  = settings.value(key, 0).toUInt();
+        if (key == "l2_blinkon")    DeviceData.Light2BlinkOnTime_mS = settings.value(key, 0).toUInt();
+        if (key == "l2_blinkoff")   DeviceData.Light2BlinkOffTime_mS = settings.value(key, 0).toUInt();
+        if (key == "l3_flash")      DeviceData.Light3FlashTime_mS  = settings.value(key, 0).toUInt();
+        if (key == "l3_blinkon")    DeviceData.Light3BlinkOnTime_mS = settings.value(key, 0).toUInt();
+        if (key == "l3_blinkoff")   DeviceData.Light3BlinkOffTime_mS = settings.value(key, 0).toUInt();
+    }
+    settings.endGroup();
+
+    // Servo
+    // -------------------------------------------------------------------------------------------------------------->>
+    settings.beginGroup("servo");
+    keys = settings.childKeys();
+    for (int i = 0; i < keys.size(); ++i)
+    {
+        QString key = keys.at(i).toLocal8Bit().constData();
+        if (key == "servo_reverse") DeviceData.ServoReversed  = settings.value(key, 0).toBool();
+        if (key == "time_recoil")   DeviceData.ServoTimeToRecoil = settings.value(key, 0).toUInt();
+        if (key == "time_return")   DeviceData.ServoTimeToReturn = settings.value(key, 0).toUInt();
+        if (key == "ep_recoil")     DeviceData.ServoEndPointRecoiled = settings.value(key, 0).toUInt();
+        if (key == "ep_battery")    DeviceData.ServoEndPointBattery = settings.value(key, 0).toUInt();
+    }
+    settings.endGroup();
+
+    // Engine
+    // -------------------------------------------------------------------------------------------------------------->>
+    settings.beginGroup("engine");
+    keys = settings.childKeys();
+    for (int i = 0; i < keys.size(); ++i)
+    {
+        QString key = keys.at(i).toLocal8Bit().constData();
+        if (key == "autostart")   DeviceData.EngineAutoStart  = settings.value(key, 0).toBool();
+        if (key == "autostop")    DeviceData.EngineAutoStopTime_mS = settings.value(key, 0).toUInt();
+    }
+    settings.endGroup();
+
 
     // We've loaded the setting from the file into our named variables,
     // Now we need to copy the named variables to our controls
@@ -299,12 +385,17 @@ void MainWindow::readSettingsFromFile(QString filename, boolean confirm)
 }
 void MainWindow::writeSettingsToFile()
 {
-    QString filename = QFileDialog::getSaveFileName(this, tr("Save Settings to INI File)"), ".", tr("INI files (*.ini)"));
+    const QString desktopFolder = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save Settings to INI File"),QString("%1/opsound.ini").arg(desktopFolder), tr("INI files (*.ini)"));
 
     if (filename == "") return; // Exit if they cancel
 
     // Create a settings object
     QSettings* settingsTo = new QSettings(filename, QSettings::IniFormat);
+
+    // If you don't call this, the "sync" command we use later will keep prior keys, and only add new ones.
+    // But of course we want to wipe the file clean first, and the only put in what has been generated this time around.
+    settingsTo->clear();
 
     MouseWait();
 
@@ -317,7 +408,7 @@ void MainWindow::writeSettingsToFile()
         // Channel function
         // -------------------------------------------------------------------------------------------------------------->>
         settingsTo->beginGroup("channel_func");
-        settingsTo->setValue(QString("ch%1_func").arg(i+1), DeviceData.RCChannel[i].chFunction);
+        settingsTo->setValue(QString("ch%1_func").arg(i+1), DeviceData.RCChannel[i].chType);
         settingsTo->endGroup();
 
         // Channel reversed
@@ -342,6 +433,7 @@ void MainWindow::writeSettingsToFile()
                 if (DeviceData.RCChannel[i].swFunctionID[j] > 0)
                 {
                     settingsTo->setValue(QString::number(i + 1) + QString::number(j + 1), DeviceData.RCChannel[i].swFunctionID[j]);
+                    //qDebug() << "Channel " << i+1 << " Pos " << j + 1 << " FunctionID " << DeviceData.RCChannel[i].swFunctionID[j];
                 }
             }
         }
@@ -365,6 +457,43 @@ void MainWindow::writeSettingsToFile()
         settingsTo->setValue(QString("engine"), DeviceData.VolumeEngine);
         settingsTo->setValue(QString("effects"), DeviceData.VolumeEffects);
         settingsTo->setValue(QString("overlay"), DeviceData.VolumeTrackOverlay);
+        settingsTo->endGroup();
+
+        // Throttle
+        // -------------------------------------------------------------------------------------------------------------->>
+        settingsTo->beginGroup("throttle");
+        settingsTo->setValue(QString("centerthrottle"), static_cast<uint>(DeviceData.centerThrottle));
+        settingsTo->endGroup();
+
+        // Lights
+        // -------------------------------------------------------------------------------------------------------------->>
+        settingsTo->beginGroup("lights");
+        settingsTo->setValue(QString("l1_flash"), DeviceData.Light1FlashTime_mS);
+        settingsTo->setValue(QString("l1_blinkon"), DeviceData.Light1BlinkOnTime_mS);
+        settingsTo->setValue(QString("l1_blinkoff"), DeviceData.Light1BlinkOffTime_mS);
+        settingsTo->setValue(QString("l2_flash"), DeviceData.Light2FlashTime_mS);
+        settingsTo->setValue(QString("l2_blinkon"), DeviceData.Light2BlinkOnTime_mS);
+        settingsTo->setValue(QString("l2_blinkoff"), DeviceData.Light2BlinkOffTime_mS);
+        settingsTo->setValue(QString("l3_flash"), DeviceData.Light3FlashTime_mS);
+        settingsTo->setValue(QString("l3_blinkon"), DeviceData.Light3BlinkOnTime_mS);
+        settingsTo->setValue(QString("l3_blinkoff"), DeviceData.Light3BlinkOffTime_mS);
+        settingsTo->endGroup();
+
+        // Servo
+        // -------------------------------------------------------------------------------------------------------------->>
+        settingsTo->beginGroup("servo");
+        settingsTo->setValue(QString("servo_reverse"), static_cast<uint>(DeviceData.ServoReversed));
+        settingsTo->setValue(QString("time_recoil"), DeviceData.ServoTimeToRecoil);
+        settingsTo->setValue(QString("time_return"), DeviceData.ServoTimeToReturn);
+        settingsTo->setValue(QString("ep_recoil"), DeviceData.ServoEndPointRecoiled);
+        settingsTo->setValue(QString("ep_battery"), DeviceData.ServoEndPointBattery);
+        settingsTo->endGroup();
+
+        // Engine
+        // -------------------------------------------------------------------------------------------------------------->>
+        settingsTo->beginGroup("engine");
+        settingsTo->setValue(QString("autostart"), static_cast<uint>(DeviceData.EngineAutoStart));
+        settingsTo->setValue(QString("autostop"), DeviceData.EngineAutoStopTime_mS);
         settingsTo->endGroup();
 
     }

@@ -3,43 +3,35 @@
 
 #include <arduino_compat.h>
 
-#define DEFAULTBAUDRATE        115200
 
+// Firmware Location
+// -----------------------------------------------------------------------------------------------------
+// Not very sophisticated. Here we store the URLs to the latest release hex and version files, and we
+// assume they will never change in a million years.
+#define LATEST_RELEASE_VERSION_URL_TEENSYSOUND    "http://openpanzer.org/downloads/soundcard/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_TEENSYSOUND        "http://openpanzer.org/downloads/soundcard/firmware/opsound.hex"
 
-// Function IDs *below* 1000 are user sounds.
-// User Sound Function IDs are constructed by (user sound number * 10) + (1,2,3) to represent play (1), repeat (2), or stop (3)
-// Example: sound  2 repeat = Function ID is 22
-// Example: sound 14 play   = Function ID is 141
-// Example: sound 22 stop   = Function ID is 223
-#define MAX_NUM_USER_SOUNDS 22
-#define function_id_usersound_multiplier        10
-#define function_id_usersound_min_range         10          // (sound 1  * multiplier)
-#define function_id_usersound_max_range         999         // (sound 99 *  multiplier)
+// General
+// -----------------------------------------------------------------------------------------------------
+#define DEFAULTBAUDRATE         115200      // Baud rate
+#define NUM_LIGHTS              3           // Number of light outputs
+#define MAX_NUM_USER_SOUNDS     22          // How many user sounds can the sound card handle
 
-
-// Function IDs *above* 1000 are specific actions.
-// They are constructed by adding 1000 to the switch_function enum
-#define function_id_other_function_start_range  1000        // start of regular (non-user sound) function IDs
-enum switch_function : uint8_t {
-    SF_NULL = 0,
-    SF_ENGINE_START,
-    SF_ENGINE_STOP,
-    SF_ENGINE_TOGGLE,
-    SF_CANNON_FIRE,
-    SF_MG_FIRE,
-    SF_MG_STOP,
-    SF_MG2_FIRE,
-    SF_MG2_STOP,
-    SF_USER                 // Special case that will get converted to a user sound function
+// Channel types
+// -----------------------------------------------------------------------------------------------------
+const byte CHANNELS 			= 5;        // Number of channels
+enum channel_type : uint8_t {
+    CT_SWITCH = 0,                          // "Digital" - signal is extracted to switch positions
+    CT_ENGINE_SPEED,                        //  Analog   - input represents engine speed
+    CT_VOLUME                               //  Analog   - input represents volume
 };
 
 
-// RC Settings
-const byte CHANNELS 			= 5;
+// Switch positions
+// -----------------------------------------------------------------------------------------------------
+// In the case where channel type = CT_SWITCH
 const byte MIN_SWITCH_POSITIONS = 2;
 const byte MAX_SWITCH_POSITIONS = 6;
-
-// Aux channels
 enum switch_positions : byte {
     SP_NULLPOS = 0,
     SP_POS1,
@@ -50,37 +42,68 @@ enum switch_positions : byte {
     SP_POS6
 };
 
-// Channel types
-enum channel_function : uint8_t {
-    CF_SWITCH = 0,
-    CF_ENGINE_SPEED,
-    CF_VOLUME
+
+// Switch functions
+// -----------------------------------------------------------------------------------------------------
+// In the case where channel type = CT_SWITCH
+enum switch_function : uint8_t {
+    SF_NULL = 0,
+    SF_ENGINE_START,
+    SF_ENGINE_STOP,
+    SF_ENGINE_TOGGLE,
+    SF_CANNON_FIRE,
+    SF_MG,
+    SF_LIGHT,
+    SF_USER
 };
 
-enum sound_action : uint8_t {
-    SOUND_PLAY = 1,
-    SOUND_REPEAT = 2,
-    SOUND_STOP = 3
+
+// Switch actions
+// -----------------------------------------------------------------------------------------------------
+// Some (but not all) switch functions are further defined by actions as well as action numbers
+// For example, the SF_USER function will control a user sound, but the action number defines which sound,
+// and the action defines whether to play it, stop it, or repeat it.
+enum switch_action : uint8_t {
+    ACTION_NULL = 0,
+    ACTION_ONSTART = 1,
+    ACTION_OFFSTOP = 2,
+    ACTION_REPEATTOGGLE = 3,
+    ACTION_STARTBLINK = 4,
+    ACTION_TOGGLEBLINK = 5,
+    ACTION_FLASH = 6
 };
 
+
+// Function ID
+// -----------------------------------------------------------------------------------------------------
+// The ID is a single number that combines the switch function, action, and action number
+// It is defined as (switch function * 10,000) + (switch action * 100) + (action number)
+#define multiplier_switchfunction   10000
+#define multiplier_switchaction     100
+
+
+// Complete Channel Settings
+// -----------------------------------------------------------------------------------------------------
+// A collection of all settings related to each channel
 struct channel_settings{
     boolean reversed;                                           // Is the channel reversed
     boolean Digital;                                            // Is this a digital channel (switch input or discrete function) or an analog input (for engine speed/volume, etc)
-    channel_function chFunction;                                // Channel function - either switch or some analog control
+    channel_type chType;                                        // Channel type - either switch or some analog control
     uint8_t numPositions;                                       // If digital, how many positions does the switch have
-    uint16_t swFunctionID[MAX_SWITCH_POSITIONS];                // Function ID for digital functions (one for each switch position) - raw number
-    switch_function swFunction[MAX_SWITCH_POSITIONS];           // Actual function code (not necessarily same as ID)
-    uint16_t userSoundNum[MAX_SWITCH_POSITIONS];                // If swFunction = SF_USER, let's save the user sound number...
-    sound_action userSoundAction[MAX_SWITCH_POSITIONS];         // ...and the play action (play, repeat, or stop)
+    uint32_t swFunctionID[MAX_SWITCH_POSITIONS];                // Function ID for digital functions (one for each switch position) - raw number
+    switch_function swFunction[MAX_SWITCH_POSITIONS];           // Actual switch function
+    uint8_t actionNum[MAX_SWITCH_POSITIONS];                    // Certain functions require a number, such as user sounds, MG, cannon, lights
+    switch_action switchAction[MAX_SWITCH_POSITIONS];           // And also a modifier to describe the action (play, repeat, stop, on, off, blink, flash, toggle, etc...)
 };
 
 
 // Squeak Settings
+// -----------------------------------------------------------------------------------------------------
 const byte NUM_SQUEAKS = 6;
 struct squeak_settings{
-    uint16_t MinInterval_mS;			 // Minimum length of time between Squeak 1 intervals
-    uint16_t MaxInterval_mS;			 // Maximum length of time between Squeak 1 intervals
-    boolean  Enabled;					 // Is Squeak1 enabled or not
+    uint16_t MinInterval_mS;                // Minimum length of time between Squeak intervals
+    uint16_t MaxInterval_mS;                // Maximum length of time between Squeak intervals
+    boolean  Enabled;                       // Is Squeak enabled or not
 };
 
 

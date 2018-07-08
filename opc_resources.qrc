@@ -31,7 +31,6 @@
         <file>images/functiontableuparrow.png</file>
         <file>images/help.png</file>
         <file>images/AboutIcon.png</file>
-        <file>css/volumeslider.qss</file>
         <file>images/minimize.png</file>
         <file>images/minimize_hover.png</file>
         <file>images/subheader.png</file>
@@ -39,9 +38,9 @@
         <file>images/OPS.png</file>
     </qresource>
     <qresource prefix="/icons">
-        <file>images/OP_Icon_16.png</file>
-        <file>images/OP_Icon_32.png</file>
-        <file>images/OP_Icon_48.png</file>
-        <file>images/OP_Icon_256.png</file>
+        <file>images/OS_Icon_16.png</file>
+        <file>images/OS_Icon_32.png</file>
+        <file>images/OS_Icon_48.png</file>
+        <file>images/OS_Icon_256.png</file>
     </qresource>
 </RCC>

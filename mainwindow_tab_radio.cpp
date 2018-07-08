@@ -70,68 +70,68 @@ void MainWindow::SetupControls_RadioTab(void)
     switchFunctionCombo[29] = ui->cboCh5Pos6;
 
     // Array of user sound number by channel/position
-    soundNumCombo[0] = ui->cboCh1Pos1_SoundNum;
-    soundNumCombo[1] = ui->cboCh1Pos2_SoundNum;
-    soundNumCombo[2] = ui->cboCh1Pos3_SoundNum;
-    soundNumCombo[3] = ui->cboCh1Pos4_SoundNum;
-    soundNumCombo[4] = ui->cboCh1Pos5_SoundNum;
-    soundNumCombo[5] = ui->cboCh1Pos6_SoundNum;
-    soundNumCombo[6] = ui->cboCh2Pos1_SoundNum;
-    soundNumCombo[7] = ui->cboCh2Pos2_SoundNum;
-    soundNumCombo[8] = ui->cboCh2Pos3_SoundNum;
-    soundNumCombo[9] = ui->cboCh2Pos4_SoundNum;
-    soundNumCombo[10] = ui->cboCh2Pos5_SoundNum;
-    soundNumCombo[11] = ui->cboCh2Pos6_SoundNum;
-    soundNumCombo[12] = ui->cboCh3Pos1_SoundNum;
-    soundNumCombo[13] = ui->cboCh3Pos2_SoundNum;
-    soundNumCombo[14] = ui->cboCh3Pos3_SoundNum;
-    soundNumCombo[15] = ui->cboCh3Pos4_SoundNum;
-    soundNumCombo[16] = ui->cboCh3Pos5_SoundNum;
-    soundNumCombo[17] = ui->cboCh3Pos6_SoundNum;
-    soundNumCombo[18] = ui->cboCh4Pos1_SoundNum;
-    soundNumCombo[19] = ui->cboCh4Pos2_SoundNum;
-    soundNumCombo[20] = ui->cboCh4Pos3_SoundNum;
-    soundNumCombo[21] = ui->cboCh4Pos4_SoundNum;
-    soundNumCombo[22] = ui->cboCh4Pos5_SoundNum;
-    soundNumCombo[23] = ui->cboCh4Pos6_SoundNum;
-    soundNumCombo[24] = ui->cboCh5Pos1_SoundNum;
-    soundNumCombo[25] = ui->cboCh5Pos2_SoundNum;
-    soundNumCombo[26] = ui->cboCh5Pos3_SoundNum;
-    soundNumCombo[27] = ui->cboCh5Pos4_SoundNum;
-    soundNumCombo[28] = ui->cboCh5Pos5_SoundNum;
-    soundNumCombo[29] = ui->cboCh5Pos6_SoundNum;
+    actionNumCombo[0] = ui->cboCh1Pos1_SoundNum;
+    actionNumCombo[1] = ui->cboCh1Pos2_SoundNum;
+    actionNumCombo[2] = ui->cboCh1Pos3_SoundNum;
+    actionNumCombo[3] = ui->cboCh1Pos4_SoundNum;
+    actionNumCombo[4] = ui->cboCh1Pos5_SoundNum;
+    actionNumCombo[5] = ui->cboCh1Pos6_SoundNum;
+    actionNumCombo[6] = ui->cboCh2Pos1_SoundNum;
+    actionNumCombo[7] = ui->cboCh2Pos2_SoundNum;
+    actionNumCombo[8] = ui->cboCh2Pos3_SoundNum;
+    actionNumCombo[9] = ui->cboCh2Pos4_SoundNum;
+    actionNumCombo[10] = ui->cboCh2Pos5_SoundNum;
+    actionNumCombo[11] = ui->cboCh2Pos6_SoundNum;
+    actionNumCombo[12] = ui->cboCh3Pos1_SoundNum;
+    actionNumCombo[13] = ui->cboCh3Pos2_SoundNum;
+    actionNumCombo[14] = ui->cboCh3Pos3_SoundNum;
+    actionNumCombo[15] = ui->cboCh3Pos4_SoundNum;
+    actionNumCombo[16] = ui->cboCh3Pos5_SoundNum;
+    actionNumCombo[17] = ui->cboCh3Pos6_SoundNum;
+    actionNumCombo[18] = ui->cboCh4Pos1_SoundNum;
+    actionNumCombo[19] = ui->cboCh4Pos2_SoundNum;
+    actionNumCombo[20] = ui->cboCh4Pos3_SoundNum;
+    actionNumCombo[21] = ui->cboCh4Pos4_SoundNum;
+    actionNumCombo[22] = ui->cboCh4Pos5_SoundNum;
+    actionNumCombo[23] = ui->cboCh4Pos6_SoundNum;
+    actionNumCombo[24] = ui->cboCh5Pos1_SoundNum;
+    actionNumCombo[25] = ui->cboCh5Pos2_SoundNum;
+    actionNumCombo[26] = ui->cboCh5Pos3_SoundNum;
+    actionNumCombo[27] = ui->cboCh5Pos4_SoundNum;
+    actionNumCombo[28] = ui->cboCh5Pos5_SoundNum;
+    actionNumCombo[29] = ui->cboCh5Pos6_SoundNum;
 
     // Array of user sound action by channel/position
-    soundActionCombo[0] = ui->cboCh1Pos1_Play;
-    soundActionCombo[1] = ui->cboCh1Pos2_Play;
-    soundActionCombo[2] = ui->cboCh1Pos3_Play;
-    soundActionCombo[3] = ui->cboCh1Pos4_Play;
-    soundActionCombo[4] = ui->cboCh1Pos5_Play;
-    soundActionCombo[5] = ui->cboCh1Pos6_Play;
-    soundActionCombo[6] = ui->cboCh2Pos1_Play;
-    soundActionCombo[7] = ui->cboCh2Pos2_Play;
-    soundActionCombo[8] = ui->cboCh2Pos3_Play;
-    soundActionCombo[9] = ui->cboCh2Pos4_Play;
-    soundActionCombo[10] = ui->cboCh2Pos5_Play;
-    soundActionCombo[11] = ui->cboCh2Pos6_Play;
-    soundActionCombo[12] = ui->cboCh3Pos1_Play;
-    soundActionCombo[13] = ui->cboCh3Pos2_Play;
-    soundActionCombo[14] = ui->cboCh3Pos3_Play;
-    soundActionCombo[15] = ui->cboCh3Pos4_Play;
-    soundActionCombo[16] = ui->cboCh3Pos5_Play;
-    soundActionCombo[17] = ui->cboCh3Pos6_Play;
-    soundActionCombo[18] = ui->cboCh4Pos1_Play;
-    soundActionCombo[19] = ui->cboCh4Pos2_Play;
-    soundActionCombo[20] = ui->cboCh4Pos3_Play;
-    soundActionCombo[21] = ui->cboCh4Pos4_Play;
-    soundActionCombo[22] = ui->cboCh4Pos5_Play;
-    soundActionCombo[23] = ui->cboCh4Pos6_Play;
-    soundActionCombo[24] = ui->cboCh5Pos1_Play;
-    soundActionCombo[25] = ui->cboCh5Pos2_Play;
-    soundActionCombo[26] = ui->cboCh5Pos3_Play;
-    soundActionCombo[27] = ui->cboCh5Pos4_Play;
-    soundActionCombo[28] = ui->cboCh5Pos5_Play;
-    soundActionCombo[29] = ui->cboCh5Pos6_Play;
+    switchActionCombo[0] = ui->cboCh1Pos1_Play;
+    switchActionCombo[1] = ui->cboCh1Pos2_Play;
+    switchActionCombo[2] = ui->cboCh1Pos3_Play;
+    switchActionCombo[3] = ui->cboCh1Pos4_Play;
+    switchActionCombo[4] = ui->cboCh1Pos5_Play;
+    switchActionCombo[5] = ui->cboCh1Pos6_Play;
+    switchActionCombo[6] = ui->cboCh2Pos1_Play;
+    switchActionCombo[7] = ui->cboCh2Pos2_Play;
+    switchActionCombo[8] = ui->cboCh2Pos3_Play;
+    switchActionCombo[9] = ui->cboCh2Pos4_Play;
+    switchActionCombo[10] = ui->cboCh2Pos5_Play;
+    switchActionCombo[11] = ui->cboCh2Pos6_Play;
+    switchActionCombo[12] = ui->cboCh3Pos1_Play;
+    switchActionCombo[13] = ui->cboCh3Pos2_Play;
+    switchActionCombo[14] = ui->cboCh3Pos3_Play;
+    switchActionCombo[15] = ui->cboCh3Pos4_Play;
+    switchActionCombo[16] = ui->cboCh3Pos5_Play;
+    switchActionCombo[17] = ui->cboCh3Pos6_Play;
+    switchActionCombo[18] = ui->cboCh4Pos1_Play;
+    switchActionCombo[19] = ui->cboCh4Pos2_Play;
+    switchActionCombo[20] = ui->cboCh4Pos3_Play;
+    switchActionCombo[21] = ui->cboCh4Pos4_Play;
+    switchActionCombo[22] = ui->cboCh4Pos5_Play;
+    switchActionCombo[23] = ui->cboCh4Pos6_Play;
+    switchActionCombo[24] = ui->cboCh5Pos1_Play;
+    switchActionCombo[25] = ui->cboCh5Pos2_Play;
+    switchActionCombo[26] = ui->cboCh5Pos3_Play;
+    switchActionCombo[27] = ui->cboCh5Pos4_Play;
+    switchActionCombo[28] = ui->cboCh5Pos5_Play;
+    switchActionCombo[29] = ui->cboCh5Pos6_Play;
 
     // Force initalization of function/sound num/sound action combos
     for (int i=0; i<CHANNELS; i++)
@@ -211,7 +211,7 @@ void MainWindow::SaveChannelType(ChannelTypeComboBox *, int ChannelNum)
     // Any change, save to our variable
     // "Switch" is data = 0, so !0 = digital flag
     DeviceData.RCChannel[ChannelNum].Digital = !static_cast<boolean>(channelTypeCombo[ChannelNum]->currentData().toUInt());
-    DeviceData.RCChannel[ChannelNum].chFunction = static_cast<channel_function>(channelTypeCombo[ChannelNum]->currentData().toUInt());
+    DeviceData.RCChannel[ChannelNum].chType = static_cast<channel_type>(channelTypeCombo[ChannelNum]->currentData().toUInt());
     if (!DeviceData.RCChannel[ChannelNum].Digital)
     {
         // Type is set to some other function like volume or engine speed,
@@ -235,9 +235,9 @@ void MainWindow::SaveChannelType(ChannelTypeComboBox *, int ChannelNum)
 void MainWindow::SaveChannelPositions(ChannelPositionsComboBox *, int ChannelNum)
 {
     // Any change, save to our variable
-    int poss = switchPosCombo[ChannelNum]->currentData().toInt();
-    if (poss < MIN_SWITCH_POSITIONS || poss > MAX_SWITCH_POSITIONS) poss = 0;
-    DeviceData.RCChannel[ChannelNum].numPositions = poss;
+    int pos = switchPosCombo[ChannelNum]->currentData().toInt();
+    if (pos < MIN_SWITCH_POSITIONS || pos > MAX_SWITCH_POSITIONS) pos = 0;
+    DeviceData.RCChannel[ChannelNum].numPositions = pos;
 
     // Now show the actions just for the number of positions we've selected
     int start_interval = (MAX_SWITCH_POSITIONS * ChannelNum);
@@ -252,20 +252,20 @@ void MainWindow::SaveChannelPositions(ChannelPositionsComboBox *, int ChannelNum
                 // Only show the num/play combos if the switch function selection is SF_USER
                 if (static_cast<switch_function>(switchFunctionCombo[start_interval+i]->currentData().toUInt()) == SF_USER)
                 {
-                    soundNumCombo[start_interval + i]->show();
-                    soundActionCombo[start_interval + i]->show();
+                    actionNumCombo[start_interval + i]->show();
+                    switchActionCombo[start_interval + i]->show();
                 }
                 else
                 {
-                    soundNumCombo[start_interval + i]->hide();
-                    soundActionCombo[start_interval + i]->hide();
+                    actionNumCombo[start_interval + i]->hide();
+                    switchActionCombo[start_interval + i]->hide();
                 }
             }
             else
             {
                 //switchFunctionCombo[start_interval+i]->hide();
-                soundNumCombo[start_interval + i]->hide();
-                soundActionCombo[start_interval + i]->hide();
+                actionNumCombo[start_interval + i]->hide();
+                switchActionCombo[start_interval + i]->hide();
                 // Clear any functions from this position
                 switchFunctionCombo[start_interval+i]->setCurrentIndex(switchFunctionCombo[start_interval + i]->findData(SF_NULL));
                 switchFunctionCombo[start_interval+i]->setEnabled(false);
@@ -278,8 +278,8 @@ void MainWindow::SaveChannelPositions(ChannelPositionsComboBox *, int ChannelNum
         for (int i=0; i<MAX_SWITCH_POSITIONS; i++)
         {
             //switchFunctionCombo[start_interval+i]->hide();
-            soundNumCombo[start_interval + i]->hide();
-            soundActionCombo[start_interval + i]->hide();
+            actionNumCombo[start_interval + i]->hide();
+            switchActionCombo[start_interval + i]->hide();
             // Clear any functions from this position
             switchFunctionCombo[start_interval+i]->setCurrentIndex(switchFunctionCombo[start_interval + i]->findData(SF_NULL));
             switchFunctionCombo[start_interval+i]->setEnabled(false);
@@ -292,16 +292,29 @@ void MainWindow::SaveChannelSwitchAction(SwitchFunctionComboBox *, int ChannelNu
     int start_interval = (MAX_SWITCH_POSITIONS * ChannelNum);
     DeviceData.RCChannel[ChannelNum].swFunction[PosNum] = static_cast<switch_function>(switchFunctionCombo[start_interval + PosNum]->currentData().toUInt());
 
-    // Now show the actions just for the number of positions we've selected
-    if (DeviceData.RCChannel[ChannelNum].swFunction[PosNum] == SF_USER)
+    switch_function sf = DeviceData.RCChannel[ChannelNum].swFunction[PosNum];
+
+    // Now show extra options for certain selections
+    switch (sf)
     {
-        soundNumCombo[start_interval + PosNum]->show();
-        soundActionCombo[start_interval + PosNum]->show();
-    }
-    else
-    {
-        soundNumCombo[start_interval + PosNum]->hide();
-        soundActionCombo[start_interval + PosNum]->hide();
+        case SF_USER:
+        case SF_MG:
+        case SF_CANNON_FIRE:
+        case SF_LIGHT:
+            // These cases will have multiple numbers and multiple actions
+            // Set up the numbers and actions, dependent on the switch function:
+            actionNumCombo[start_interval + PosNum]->setActionNums(sf);
+            switchActionCombo[start_interval + PosNum]->setActions(sf);
+            // Now show
+            actionNumCombo[start_interval + PosNum]->show();
+            // Except cannon fire doesn't have any actions, just the numbers
+            if (sf != SF_CANNON_FIRE) switchActionCombo[start_interval + PosNum]->show();
+            break;
+
+        default:
+            // Otherwise, we hide
+            actionNumCombo[start_interval + PosNum]->hide();
+            switchActionCombo[start_interval + PosNum]->hide();
     }
 }
 

@@ -105,7 +105,7 @@ QString versionfile;
         MouseWait();
 
         // Now we kick off the download. It is two part, and we start off by trying to get the version file.
-        // Release version URLs are defined at the top of MainWindow.h
+        // Release version URLs are defined at the top of op_defines.h
         versionfile = LATEST_RELEASE_VERSION_URL_TEENSYSOUND;
         VersionDownloader->startDownload(versionfile);
     }
@@ -176,7 +176,7 @@ void MainWindow::SaveWebHexToLocal()
     QString hexFilePath;
     hexFilePath = hexFileFolder + QString("OPSOUND_%1.hex").arg(formattedVersion);
 
-    //QString hexFilePath = QString("%1/firmware/TCBMK1_%2.hex").arg(QCoreApplication::applicationDirPath()).arg(formattedVersion);
+    //QString hexFilePath = QString("%1/firmware/OPSOUND_%2.hex").arg(QCoreApplication::applicationDirPath()).arg(formattedVersion);
 
     // Make sure the firmware folder exists as a sub-directory of the application directory path
     if (!QDir(hexFileFolder).exists())
@@ -454,8 +454,8 @@ QString hex;
     ui->cboConsoleBaud->setEnabled(false);
 
     // .arg(QCoreApplication::applicationDirPath()); returns the release dev folder:
-    // "path/QT/Projects/build-OpenPanzerConfig-Desktop_Qt_5_4_2_MSVC2013_64bit-Release/release/
-    // So for testing I've copied the AVRDude/Teensy loader files there
+    // "path/QT/Projects/build-OpenPanzerSound_Qt_5_4_2_MinGW_32bit-Release/release/
+    // So for testing copy the Teensy loader files there
 
     // Now construct our command line arguments
     // We will use PJRC's command-line version of Teensy Loader to flash the Teensy 3.2 chip on the Sound Card.

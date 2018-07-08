@@ -1,4 +1,4 @@
-/* OPConfig 		Configuration program for the Open Panzer TCB (Tank Control Board)
+/* OPConfig 		Configuration program for the Open Panzer Sound Card
  * Source: 			openpanzer.org
  * Authors:    		Luke Middleton
  *
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     // Untested because I am still compiling in 5.4 for other reasons (Qt Assistant doesn't work in 5.6 for one)
     //QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    QApplication::setApplicationName("OP Sound");
+    QApplication::setApplicationName("OP Sound INI Creator");
     QApplication::setApplicationVersion(VER_PRODUCTVERSION_STR);
     QApplication::setOrganizationName("OPEN PANZER");
 

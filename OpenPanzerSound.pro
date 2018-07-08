@@ -1,4 +1,4 @@
-# OPConfig 		Configuration program for the Open Panzer TCB (Tank Control Board)
+# OPConfig 		Configuration program for the Open Panzer Sound Card
 # Source: 		openpanzer.org
 # Authors:    		Luke Middleton
 #
@@ -51,9 +51,9 @@ SOURCES += main.cpp\
     singleapplication.cpp \
     combo_channeltype.cpp \
     combo_channelpositions.cpp \
-    combo_switchfunctions.cpp \
-    combo_soundnum.cpp \
-    combo_soundaction.cpp
+    combo_switchaction.cpp \
+    combo_actionnum.cpp \
+    combo_switchfunctions.cpp
 
 HEADERS  += mainwindow.h \
     arduino_compat.h \
@@ -72,9 +72,9 @@ HEADERS  += mainwindow.h \
     singleapplication.h \
     combo_channeltype.h \
     combo_channelpositions.h \
-    combo_switchfunctions.h \
-    combo_soundnum.h \
-    combo_soundaction.h
+    combo_switchaction.h \
+    combo_actionnum.h \
+    combo_switchfunctions.h
 
 FORMS    += mainwindow.ui
 

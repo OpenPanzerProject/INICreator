@@ -1,4 +1,4 @@
-/* OPConfig 		Configuration program for the Open Panzer TCB (Tank Control Board)
+/* OPConfig 		Configuration program for the Open Panzer Sound Card
  * Source: 			openpanzer.org
  * Authors:    		Luke Middleton
  *
@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
 
     // Window icon
-    setWindowIcon(QIcon(":/icons/images/OP_Icon_32.png"));
+    setWindowIcon(QIcon(":/icons/images/OS_Icon_32.png"));
 
     // Create our assistant for help documentation
     assistant = new Assistant;
@@ -69,7 +69,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     listViewWestModel = new QStringListModel(this);
     // Make data list
     QStringList strList;
-    strList << "Radio" << "Sounds" << "Firmware";
+    strList << "Radio" << "Settings" << "Firmware";
     // Populate our model
     listViewWestModel->setStringList(strList);
     // Glue model and view together
@@ -192,68 +192,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
       ui->stackedWidgetMain->setCurrentIndex(0);
       qApp->processEvents();  // Equivalent of VB DoEvents()
 
-
-    // Finally, now we're all loaded and cozy-comfy: parse any command line arguments
-    // ---------------------------------------------------------------------------------------------------------------------------------->>
-      // But wait! Don't process them until the window has loaded.
-      // "A QTimer with a timeout of 0 will time out as soon as all the events in the window system's event queue have been processed"
-      QTimer::singleShot(0, this, SLOT(ProcessCommandLineArgs()));
-
 }
 
-
-//------------------------------------------------------------------------------------------------------------------------>>
-// COMMAND LINE ARGUMENTS
-//------------------------------------------------------------------------------------------------------------------------>>
-void MainWindow::ProcessCommandLineArgs()
-{
-    // At present we don't have much in the way of command line options configured, and there really isn't much need.
-    // But our Windows installer will associate ".opz" files with the OPConfig application. Opz files are XML settings files
-    // used to save TCB settings to a computer as backup. What we have done in the installer (Inno Setup) is to cause any
-    // double-click on an .opz file in Windows to execute opconfig.exe with a command line option -f followed by the path and
-    // name of the opz file. For example, clicking on C:\mysettings.opz would execute:
-    // opconfig -f C:\mysettings.opz
-
-    // So we do want to parse the -f option, get the file name, and pass it to our readSettingsFromFile routine (mainwindow_file_rw.cpp)
-
-    // If future command line arguments are created in the future, we would check for their presence here and create whatever logic
-    // is needed to handle them.
-
-    // The QCommandLineParser adds some convenient functionality for checking command line flags and values. We will only be using
-    // a very small portion of what it can actually do, which includes command line help, etc...
-    // QCommandLineParser: http://doc.qt.io/qt-5/qcommandlineparser.html
-    // QCommandLineOption: http://doc.qt.io/qt-5/qcommandlineoption.html
-    QCommandLineParser parser;
-
-    // Create an -f option with a value (filename) and call it loadSettingsFileOption. They can use syntax "-f" or "--file"
-    // - First argument of this version of QCommandLineOption is a string list of the various ways they can write the option (f or file)
-    // - Second is the description ("Read settings from file.")
-    // - Third is the name we give to the value the user will pass for this option (filename)
-    QCommandLineOption loadSettingsFileOption(QStringList() << "f" << "file",
-                                              "Read settings from file.",
-                                              "filename");
-
-    // Now add this option to our parser
-    parser.addOption(loadSettingsFileOption);
-
-    // Process the actual command line arguments given by the user. Here we could pass the app (if we were in main.cpp),
-    // or it also allows us to simply pass a QStringList of arguments.
-    parser.process(QCoreApplication::arguments());
-
-    // Check if the -f flag was even used (we named it loadSettingsFileOption)
-    if (parser.isSet(loadSettingsFileOption))
-    {
-        // It was, now retrieve the value that came with it.
-        QString filename = (parser.value(loadSettingsFileOption));
-        filename.simplified(); // trim white space
-
-        // Ok - if they passed a file name, send it to the readSettingsFromFile function (mainwindow_file_rw.cpp)
-        if (filename != "")
-        {
-            readSettingsFromFile(filename, true);
-        }
-    }
-}
 
 //------------------------------------------------------------------------------------------------------------------------>>
 // FORM - WINSPARKLE AUTO UPDATER
@@ -268,7 +208,7 @@ void MainWindow::initWinSparkle()
 
     //If these functions aren't called by the app, the URL is obtained from
     //Windows resource named "FeedURL" of type "APPCAST".
-//    win_sparkle_set_appcast_url("http://openpanzer.org/downloads/opconfig/latestrelease/appcast.xml");
+//    win_sparkle_set_appcast_url("http://openpanzer.org/downloads/soundcard/inicreator/latestrelease/appcast.xml");
 //    win_sparkle_set_app_details(L"openpanzer.org", L"OP Config Update Example", L"1.0");
 
     // This specifies whether automatic checks should occur. We do not want automatic checks because it
@@ -564,6 +504,10 @@ void MainWindow::initActionsConnections()
     connect(ui->actionSaveFile, SIGNAL(triggered()), this, SLOT(writeSettingsToFile()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
 
+    // Add keyboard shortcuts to open/save
+    ui->actionOpenFile->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
+    ui->actionSaveFile->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
+
     // Tools Menu
     ui->actionResetAllVals->setEnabled(true);
     connect(ui->actionResetAllVals, SIGNAL(triggered()), this, SLOT(ResetAllValues()));
@@ -625,10 +569,12 @@ void MainWindow::SetupHelpButtons()
     // Connect all the help buttons to the signal mapper
     // Radio tab
         connect(ui->hpbRadio, SIGNAL(released()), signalMapper, SLOT(map()));               // Radio setup
-    // Sounds tab
-        connect(ui->hpbGeneralSound, SIGNAL(released()), signalMapper, SLOT(map()));        // General sound options
+    // Settings tab
+        connect(ui->hpbSoundVolumes, SIGNAL(released()), signalMapper, SLOT(map()));        // Volumes
         connect(ui->hpbSoundSqueaks, SIGNAL(released()), signalMapper, SLOT(map()));        // Squeak section
-        connect(ui->hpbSoundVolumes, SIGNAL(released()), signalMapper, SLOT(map()));        // Relative volumes
+        connect(ui->hpbLights, SIGNAL(released()), signalMapper, SLOT(map()));              // Lights
+        connect(ui->hpbEngine, SIGNAL(released()), signalMapper, SLOT(map()));              // Engine
+        connect(ui->hpbServo, SIGNAL(released()), signalMapper, SLOT(map()));               // Recoil servo
     // Firmware tab
         connect(ui->hpbFirmware, SIGNAL(released()), signalMapper, SLOT(map()));            // Firmware
         connect(ui->hpbConsole, SIGNAL(released()), signalMapper, SLOT(map()));             // Console
@@ -638,9 +584,11 @@ void MainWindow::SetupHelpButtons()
     // Radio tab
         signalMapper->setMapping(ui->hpbRadio, "radio.html");                               // Radio setup
     // Sounds
-        signalMapper->setMapping(ui->hpbGeneralSound, "sounds.html");                       // Sound tab
-        signalMapper->setMapping(ui->hpbSoundSqueaks, "sounds.html#squeaks");               // Squeak settings
-        signalMapper->setMapping(ui->hpbSoundVolumes, "sounds.html#volumes");               // Relative volumes
+        signalMapper->setMapping(ui->hpbSoundVolumes, "settings.html#volumes");             // Volumes
+        signalMapper->setMapping(ui->hpbSoundSqueaks, "settings.html#squeaks");             // Squeak settings
+        signalMapper->setMapping(ui->hpbLights, "settings.html#lights");                    // Lights
+        signalMapper->setMapping(ui->hpbEngine, "settings.html#engine");                    // Engine
+        signalMapper->setMapping(ui->hpbServo, "settings.html#recoil");                     // Recoil servo
     // Firmware
         signalMapper->setMapping(ui->hpbFirmware, "firmware.html#flash");                   // Firmware
         signalMapper->setMapping(ui->hpbConsole, "firmware.html#console");                  // Console
@@ -727,7 +675,7 @@ void MainWindow::AboutOP()
     infoText.append(VER_COPYRIGHT_YEAR_STR);
     infoText.append(" <a href='http://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");
 
-    about.setWindowTitle("  OP Sound");
+    about.setWindowTitle("  OP Sound INI Creator");
     about.setTextFormat(Qt::RichText);   //this is what makes the links clickable
     about.setText("An ini-file creator utility for the&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />Open Panzer Sound Card.");
     //about.setInformativeText("<span style='font-size: 12px;'>Version 1.0<br /><br />&#169; 2016 <a href='http://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");

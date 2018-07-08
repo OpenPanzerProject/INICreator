@@ -27,8 +27,33 @@ struct _device_data {
     uint8_t  VolumeTrackOverlay;                 // Relative, not absolute volumes
     uint8_t  VolumeEffects;                      // Relative, not absolute volumes
 
+// Lights
+    uint16_t Light1FlashTime_mS;				 // Single blink on time in milliseconds.
+    uint16_t Light1BlinkOnTime_mS;               // This is the time the blink stays on.
+    uint16_t Light1BlinkOffTime_mS;              // This is the time the blink stays off.
+    uint16_t Light2FlashTime_mS;				 // Single blink on time in milliseconds.
+    uint16_t Light2BlinkOnTime_mS;               // This is the time the blink stays on.
+    uint16_t Light2BlinkOffTime_mS;              // This is the time the blink stays off.
+    uint16_t Light3FlashTime_mS;				 // Single blink on time in milliseconds.
+    uint16_t Light3BlinkOnTime_mS;               // This is the time the blink stays on.
+    uint16_t Light3BlinkOffTime_mS;              // This is the time the blink stays off.
+
+// Servo
+    uint16_t ServoTimeToRecoil;                  // In mS
+    uint16_t ServoTimeToReturn;                  // In mS
+    boolean  ServoReversed;
+    uint8_t  ServoEndPointRecoiled;
+    uint8_t  ServoEndPointBattery;
+
+// Throttle
+    boolean centerThrottle;                      // If true, stick centered = idle, if false stick at low position = idle
+
+// Engine
+    boolean EngineAutoStart;					 // If true, engine will auto-start on first blip of throttle. If false, start engine with user selected trigger.
+    int32_t EngineAutoStopTime_mS;				 // If positive, after this amount of time at idle the engine will turn itself off (in milliseconds). 0 to disable.
+
 // Program setting
-    boolean PrintDebug;							 // If true, TCB will print debugging messages out the DebugSerial serial port
+    boolean PrintDebug;							 // If true, will print debugging messages out the DebugSerial serial port
 
 // Marker
     uint32_t InitStamp;       		 		     //

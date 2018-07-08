@@ -1,9 +1,12 @@
 #frmChannelOrder,
 #frmSqueaks,
 #frmVolume,
-#frmSoundSettings,
+#frmEngine,
+#frmServo,
+#frmLights,
 #frmFlash,
-#frmConsole
+#frmConsole,
+#frmCom
  {
     border: 1px solid #666;
 /*	You can do this if you want a header color different from the background.

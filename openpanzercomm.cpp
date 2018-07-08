@@ -5,13 +5,6 @@ OpenPanzerComm::OpenPanzerComm()
     // Objects
     // ---------------------------------------------------------------------------------------------------------------------------------->>
         serial = new QSerialPort(this);
-        // setSettingsRestoredOnClose will be deprecated in QT 6 and beyond. If setSettingsRestoredOnClose is true, it means QSerialPort
-        // will restore the previous settings on close, which is the default. Some have found that if prior to opening the port that
-        // DTR was low, QSerialPort will set DTR back to low on disconnect. In our case that is not really a terrible problem (it resets
-        // the device, which we *may* want to do anyway (depends)). The bigger issue is resetting on connect, but we have sort of found a
-        // way to work around that. Sadly, regardless of what we put this setting to or any other, I can not get QSerialPort to behave
-        // consistently with regards to the state of DTR on serial port open. Not to mention the crazy things Windows does with it when the
-        // port is closed as part of its "discovery" (basically toggle DTR every half second, keeping the TCB in a continual state of reset).
         serial->setSettingsRestoredOnClose(false);
 
 

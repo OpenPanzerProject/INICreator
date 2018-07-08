@@ -1,4 +1,4 @@
-/* OPConfig 		Configuration program for the Open Panzer TCB (Tank Control Board)
+/* OPConfig 		Configuration program for the Open Panzer Sound Card
  * Source: 			openpanzer.org
  * Authors:    		Luke Middleton
  *
@@ -44,12 +44,13 @@
 #include <QSpinBox>
 #include <QCommandLineParser>
 #include <QSettings>
+#include <QStandardPaths>
 #include <combo_baudrates.h>
 #include <combo_channeltype.h>
 #include <combo_channelpositions.h>
 #include <combo_switchfunctions.h>
-#include <combo_soundnum.h>
-#include <combo_soundaction.h>
+#include <combo_actionnum.h>
+#include <combo_switchaction.h>
 #include <helpbutton.h>                             // Custom push button for help files
 #include <openpanzercomm.h>                         // OpenPanzer communication library
 #include <assistant.h>
@@ -75,11 +76,6 @@ enum StatusLabelStatus{slGood, slBad, slNeutral};   // We use these to decide wh
 #define TAB_INDEX_RADIO             0
 #define TAB_INDEX_SOUNDS            1
 #define TAB_INDEX_FIRMWARE          2
-
-// Not very sophisticated. Here we store the URLs to the latest release hex and version files, and we
-// assume they will never change in a million years.
-#define LATEST_RELEASE_VERSION_URL_TEENSYSOUND    "http://openpanzer.org/downloads/soundcard/firmware/version.txt"
-#define LATEST_RELEASE_HEX_URL_TEENSYSOUND        "http://openpanzer.org/downloads/soundcard/firmware/opsound.hex"
 
 // Struct for firmware version info
 struct FirmwareVersion{
@@ -120,11 +116,6 @@ public slots:
     void initWinSparkle();                          // Initialize the WinSparkle app
     void checkForUpdates();                         // The check for updates function
 
-    // Slot for processing command line arguments. Better as a slot because we can assign a signal to it that will only call it
-    // after the main loop has started. Also make it public so QApplication (or in our case, SingleApplication) can call it.
-    // ---------------------------------------------------------------------------------------------------->>
-      void ProcessCommandLineArgs();                // If the app is opened with command line arguments, we process them (MainWindow.cpp)
-
 
 // -------------------------------------------------------------------------------------------------------->>
 // SIGNALS
@@ -137,7 +128,7 @@ signals:
 // -------------------------------------------------------------------------------------------------------->>
 private slots:
     // These are functions that will be called if we connect them to a signal
-    void changeStackedWidget(const QModelIndex&, const QModelIndex&);
+      void changeStackedWidget(const QModelIndex&, const QModelIndex&);
 
     // Slots for the Assistant (help documentation) and the About menu
     // ---------------------------------------------------------------------------------------------------->>
@@ -176,7 +167,7 @@ private slots:
       void SaveChannelReversed(bool checked, int);
       void SaveChannelType(ChannelTypeComboBox *, int);
       void SaveChannelPositions(ChannelPositionsComboBox *, int);
-      void SaveChannelSwitchAction(SwitchFunctionComboBox *, int, int);
+      void SaveChannelSwitchAction(SwitchFunctionComboBox *, int , int);
 
       // Sound tab
       void ShowHideSqueak1Settings(bool);
@@ -275,8 +266,8 @@ private:
         QCheckBox *reversedCheck[CHANNELS];
         ChannelPositionsComboBox *switchPosCombo[CHANNELS];
         SwitchFunctionComboBox *switchFunctionCombo[CHANNELS * MAX_SWITCH_POSITIONS];
-        SoundNumComboBox *soundNumCombo[CHANNELS * MAX_SWITCH_POSITIONS];
-        SoundActionComboBox *soundActionCombo[CHANNELS * MAX_SWITCH_POSITIONS];
+        ActionNumComboBox *actionNumCombo[CHANNELS * MAX_SWITCH_POSITIONS];
+        SwitchActionComboBox *switchActionCombo[CHANNELS * MAX_SWITCH_POSITIONS];
 
         channel_settings ChannelSettings[CHANNELS];
 
@@ -324,14 +315,14 @@ private:
     // Physical Device Settings
     // ---------------------------------------------------------------------------------------------------->>
       OpenPanzerComm *comm;                         // Our OpenPanzer Communication object
-      boolean AttemptConnect;                       // This will only be true while the connection attempt is in process. Once we are
+      boolean AttemptConnect = false;               // This will only be true while the connection attempt is in process. Once we are
                                                     // connected or disconnected it will become false, and connection status can be obtained
                                                     // from comm->isConnected()
 
-    // Reading from and Writing to Device
+    // Reading from and writing to INI file
     // ---------------------------------------------------------------------------------------------------->>
       void readSettingsFromFile(QString, boolean);  // Give a file path, it verifies the file exists and tries to read it in. If the second arg is true, will provide confirmation message
-
+      uint32_t switchSettingsToID(switch_function, switch_action, uint8_t);   // Pass a swich function, switch action, and action number, return a FunctionID
 
 };
 
