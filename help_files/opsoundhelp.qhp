@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QtHelpProject version="1.0">
+    <namespace>openpanzer.desktop.help</namespace>
+    <virtualFolder>docs</virtualFolder>
+    <filterSection>
+        <toc>
+            <section title="Getting Started with INI Creator" ref="gettingstarted.html"></section>
+            <section title="Save Settings to a File" ref="writefile.html"></section>
+            <section title="Radio Tab" ref="radio.html"></section>
+            <section title="Settings Tab" ref="settings.html"></section>
+            <section title="Firmware Tab" ref="firmware.html"></section>
+            <section title="Function List" ref="functionlist.html"></section>
+            <section title="Sound File Reference" ref="soundfiles.html"></section>
+        </toc>
+		
+        <keywords>
+        </keywords>
+        
+        <files>
+			<!-- THIS APPEARS NECESSARY --> 
+			<file>index.html</file>
+						
+			<!-- GETTING STARTED SECTION --> 
+			<file>gettingstarted.html</file>
+            <file>writefile.html</file>
+			
+			<!-- TAB REFERENCE --> 
+			<file>radio.html</file>
+            <file>settings.html</file>
+            <file>firmware.html</file>
+
+			<!-- REFERENCE --> 
+            <file>functionlist.html</file>
+            <file>soundfiles.html</file>
+			
+			<!-- CSS --> 
+			<file>opsoundhelp.css</file>
+			
+			<!-- IMAGES --> 
+			<file>images/ul_icon.png</file>				<!-- General	 		-->
+			<file>images/ul_icon_small.png</file>
+			<file>images/h4_icon.png</file>
+            <file>images/functionexample.png</file>     <!-- Function List		-->
+            <file>images/AboutIcon.png</file>			<!-- About dialog		-->
+			<file>images/AboutIcon.png</file>			<!-- Index page  		-->
+			
+        </files>
+    </filterSection>
+</QtHelpProject>

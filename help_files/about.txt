@@ -1,8 +1,4 @@
 
-<img src="/images/opconfig.png" />
-<br />
-<br />
-
 <span style="font-size: 14px;">
 	An INI file creator utility for the &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
 	Open Panzer Sound Card.

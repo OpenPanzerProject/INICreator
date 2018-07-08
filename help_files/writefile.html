@@ -2,52 +2,28 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-	<title>OPZ Files</title>
-	<link rel="stylesheet" type="text/css" href="opconfighelp.css">
+	<title>INI Files</title>
+	<link rel="stylesheet" type="text/css" href="opsoundhelp.css">
 </head>
 
 
 <body>
 
-	<h1>Using OPZ Files</h1>
-
-	<img src="images/savesettings.png" />
-	<br />
-	<br />
+	<h1>Save Settings to INI Files</h1>
 
 	<p>
-	The TCB has many settings and once you have your radio and tank setup just the way you like it, you may want to save these settings to a file for backup. You may also want to install a 
-	second TCB into another model, and using a settings file from a previous model can be a good starting point. 
-	</p>
-
-	<div style="float: right;"><img src="images/opz_icon.png"/></div>
-	<h4>File Format</h4>
-	<p>
-	Settings files are saved with an ".opz" extension, but they can be opened with a standard text editor. In fact, OPZ files are actually Extensible Markup Language (XML) files. 
-	On your computer, OPZ files will display the OPZ Settings icon shown at right.
+	To transfer your settings to the OP Sound Card, you must first save them to an INI file, which is just a special kind of text file with the extension <span class="code">.ini</span>.
     </p>
-
-    <h4>Save Settings</h4>
+    
     <p>
-	To save your settings to an OPZ file, click the <b>File</b> item in the <b>Menu Bar</b>, then select "Save Settings to File." You will be prompted for a location and a file name. 
-	</p>
-	
-	<h4>Import Settings</h4>
-	<p>
-	To import settings from an OPZ file you saved previously, go again to the <b>File</b> item in the <b>Menu Bar</b>, then select "Import Settings." Then browse to the location on your 
-	computer where your file is saved.
-	</p>
-	
-	<h2>Notes</h2>
-	<p>
-	<b>Note 1:</b> When you import settings from an OPZ file, you are only importing them into the OP Config program. They won't be applied to the TCB unless you then connect to the TCB 
-	and write them to the device.<br /><br />
-	</p>
-	
-	<p>
-	<b>Note 2:</b> If you are connected to the TCB when you save or import an OPZ file, you may find the TCB disconnects while you have the file browser open. This is a known quirk. 
-	Simply re-connect when you are done loading or saving your file.
-	</p>
+    To save an INI file, go to the File menu and select "Save Settings to File," or type Ctrl+S. You will be prompted for a file location, save the file and be sure to give it the name 
+    <span class="code">opsound.ini</span>. Now place a copy of <span class="code">opsound.ini</span> onto the Micro SD memory chip and insert it into your OP Sound Card. On boot the sound card
+    will read the settings from the file. 
+    </p>
+    
+    <p>
+    You can also load settings from an ini file into the INI Creator utility, go to the File menu and select "Open INI File" or type Ctrl+O.
+    </p>
 	
 <br />
 <br />

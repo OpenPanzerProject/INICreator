@@ -1,0 +1,177 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Sound File Reference</title>
+	<link rel="stylesheet" type="text/css" href="opsoundhelp.css">
+</head>
+
+
+<body>
+
+	<div id="toc">
+		<h3>Topics</h3>
+		<ul>
+			<li><a href="#eng">Engine Sounds</a></li>
+			<li><a href="#eff">Sound Effect Sounds</a></li>
+		</ul>
+	</div>
+
+    <h1>Sound Files</h1>
+
+    <p>The sound card identifies the function of each sound by its file name, so you must name your files exactly as shown in the tables below. 
+    Not every sound is required: if there is some sound you don't want to play, just omit it from the SD card and it will be ignored. 
+    </p>
+
+    </p>
+    Sound files must be saved as <b>16 bit 44,100 Hz WAV files</b>. It doesn't matter if the files are in mono or stereo format, but since the card can only drive a 
+    single speaker any stereo files will be output as mono. 
+    </p>
+
+
+    <h2 id="eng">Engine Sounds</h2>
+
+	<table width="700px">
+		<tr>
+			<th width="20%">Effect</th>
+			<th width="20%">File Name</th>
+			<th width="60%">Notes</th>
+		</tr>
+		<tr>
+			<td>Engine Start</td>
+			<td>enstart1.wav</td>
+			<td>Default/Cold start</td>
+		</tr>
+		<tr>
+			<td>Engine Hot Start</td>
+			<td>enstart2.wav</td>
+			<td>Optional, if present will use on second and subsequent starts</td>
+		</tr>
+		<tr>
+			<td>Engine Idle</td>
+			<td>enidle1.wav<br/>enidle2.wav<br/>enidle3.wav<br/>enidle4.wav<br/>enidle5.wav</td>
+			<td>If multiple idle sounds specified, a different one will be played each time vehicle returns to idle.</td>
+		</tr>
+		<tr>
+			<td>Engine Accelerate</td>
+			<td>enaccl1.wav<br/>enaccl2.wav<br/>enaccl3.wav<br/>enaccl4.wav<br/>enaccl5.wav</td>
+			<td>The acceleration sound is played as a transition from idle to moving.
+                            If multiple sounds specified, a different one will be played each time vehicle begins moving.</td>
+		</tr>
+		<tr>
+			<td>Engine Decelerate</td>
+			<td>endecl1.wav<br/>endecl2.wav<br/>endecl3.wav<br/>endecl4.wav<br/>endecl5.wav</td>
+			<td>The deceleration sound is played as a transition from moving
+                            to stopped (idle). If multiple sounds specified, a different one will be
+                            played each time vehicle stops moving.</td>
+		</tr>
+		<tr>
+			<td>Vehicle Moving</td>
+			<td>enrun1.wav<br/>enrun2.wav<br/>enrun3.wav<br/>enrun4.wav<br/>enrun5.wav<br/>enrun6.wav<br/>enrun7.wav<br/>enrun8.wav<br/>enrun9.wav<br/>enrun10.wav</td>
+			<td>
+                Engine sound when vehicle moving, with enrun1.wav being the slowest speed
+                and higher numbers being faster speed. Not all sounds are required, as
+                many as are included will automatically be evenly distributed across the
+                entire speed range.
+            </td>
+		</tr>
+		<tr>
+			<td>Engine Shutdown</td>
+			<td>enstop.wav</td>
+			<td></td>
+		</tr>
+	</table>
+    
+
+    <h2 id="eff">Sound Effects</h2>
+
+	<table width="700px">
+		<tr>
+			<th width="20%">Effect</th>
+			<th width="20%">File Name</th>
+			<th width="18%">Optional</th>
+			<th width="42%">Notes</th>
+		</tr>
+		<tr>
+			<td>Cannon 1<br/>Cannon 2<br/>Cannon 3</td>
+			<td>cannonf.wav<br/>cannonf2.wav<br/>cannonf3.wav</td>
+            <td></td>
+			<td>
+                These sounds will be played with the Cannon Fire function, and the corresponding light output (1, 2, or 3) will flash for the length of time specified on the 
+                <a href="settings.html">Settings tab</a>. Additionally the recoil servo action will be performed for Cannon 1 (but not for Cannon 2 or 3).
+            </td>
+		</tr>
+		<tr>
+			<td>Machine Gun 1</td>
+			<td>mg.wav</td>
+			<td>mg_start.wav<br/>mg_stop.wav</td>
+            <td>
+                The optional start and stop sounds will play at the beginning or end of the repeating portion, if present. Light Output 1 will blink while the sound is playing 
+                (blink rate defined on the <a href="settings.html">Settings tab</a>.)
+            </td>
+		</tr>
+		<tr>
+			<td>Machine Gun 2</td>
+			<td>mg2.wav</td>
+			<td>mg2start.wav<br/>mg2stop.wav</td>
+            <td>
+                The optional start and stop sounds will play at the beginning or end of the repeating portion, if present. Light Output 2 will blink while the sound is playing 
+                (blink rate defined on the <a href="settings.html">Settings tab</a>.)
+            </td>
+		</tr>
+		<tr>
+			<td>Machine Gun 3</td>
+			<td>mg3.wav</td>
+			<td>mg3start.wav<br/>mg3stop.wav</td>
+            <td>
+                The optional start and stop sounds will play at the beginning or end of the repeating portion, if present. Light Output 3 will blink while the sound is playing 
+                (blink rate defined on the <a href="settings.html">Settings tab</a>.)
+            </td>
+		</tr>
+		<tr>
+			<td>User Sounds</td>
+			<td>user1.wav<br/>user2.wav<br/>user3.wav<br/><b>.</b><br/><b>.</b><br/><b>.</b><br/>user20.wav<br/>user21.wav<br/>user22.wav</td>
+			<td></td>
+            <td>
+                There are 22 general purpose user sounds available, which can be played, repeated or stopped with the User Sound functions.
+            </td>
+		</tr>
+		<tr>
+			<td>Light 1<br/>Light 2<br/>Light 3<br/></td>
+			<td>light1.wav<br/>light2.wav<br/>light3.wav</td>
+			<td></td>
+            <td>
+                If present, the light sound will automatically play whenever the corresponding light output is turned On, Off, or Toggled. 
+            </td>
+		</tr>
+		<tr>
+			<td>Squeaks</td>
+			<td>squeak1.wav<br/>squeak2.wav<br/>squeak3.wav<br/>squeak4.wav<br/>squeak5.wav<br/>squeak6.wav</td>
+			<td></td>
+            <td>
+                Squeaks are sounds that will play randomly within user-defined time spans when the throttle speed is above a certain threshold, 
+                defined on the <a href="settings.hmtl">Settings tab</a>. 
+            </td>
+		</tr>
+		<tr>
+			<td>Track<br/>Overlay<br/>Sounds</td>
+			<td>tracks1.wav<br/>tracks2.wav<br/>tracks3.wav<br/>tracks4.wav<br/>tracks5.wav<br/>tracks6.wav<br/>tracks7.wav<br/>tracks8.wav<br/>tracks9.wav<br/>tracks10.wav</td>
+			<td>trkstart.wav<br/>trkstop.wav</td>
+            <td>
+                Track overlay sounds are speed-dependent sounds that will play when the throttle speed exceeds idle. Starting with <span class="code">tracks1.wav</span> played at the slowest 
+                speed and higher numbers being played at faster speeds. Not all sounds are required, as many as are included will automatically be evenly distributed across the entire speed 
+                range. Optional start and stop sounds can be added that will play when the vehicle first begins to move or just comes to a stop.
+            </td>
+		</tr>
+	</table>
+
+
+<br />
+<br />
+<br />
+
+</body>
+
+</html>
+
+

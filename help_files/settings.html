@@ -1,0 +1,199 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Settings</title>
+	<link rel="stylesheet" type="text/css" href="opsoundhelp.css">
+</head>
+
+
+<body>
+
+	<div id="toc">
+		<h3>Topics</h3>
+		<ul>
+			<li><a href="#volumes">Individual Volumes</a></li>
+			<li><a href="#squeaks">Squeak Settings</a></li>
+			<li><a href="#lights">Light Settings</a></li>
+			<li><a href="#engine">Engine Settings</a></li>
+			<li><a href="#recoil">Recoil Servo</a></li>
+		</ul>
+	</div>
+		
+	<h1>Other Settings</h1>
+
+
+    <!-- VOLUMES 
+      ---------------------------------------------------------------------------------------------------------------------------------
+      -->
+	<h2 id="volumes">Individual Maximum Volumes</h2>
+	<p>
+    The volume adjustments here allow you to adjust the maximum volumes of individual sound categories. Note that if the three ratios sum more than 100% you may hear distortion when playing multiple sounds 
+    at once. For example, if you set maximum Engine volume to 80% and maximum Effects volume to 60%, the combined total would equal 140% when the master volume is set to 100%. This will create 
+    distortion if for example you play the machine gun sound (an effect) while the engine is running, unless you operate at less than 100% master volume or modify the ratios.
+    </p>
+    
+    <p>
+    Completely aside from the settings here you are still able to adjust the absolute, or "master" volume, but that is accomplished either with a physical potentiometer attached to your sound card, 
+    or remotely when the Volume function is selected for the Channel 5 RC input. 
+	</p>
+	
+
+
+    <!-- SQUEAKS
+      ---------------------------------------------------------------------------------------------------------------------------------
+      -->
+	<h2 id="squeaks">Squeak Settings</h2>
+	<p>
+	Squeaks are optional sound files that will play only when the throttle speed exceeds a predefined level. Up to 6 squeak sounds can be defined, and when active they will repeat at 
+    randomly selected intervals within the user-defined time span. The sound files are named <span class="code">squeak1.wav</span> through <span class="code">squeak6.wav</span>
+    </p>
+    
+    <p>
+    To understand how the random repetition works, let's take an example. Suppose we set the Minimum time interval for Squeak 2 to 2000 mS (2 seconds) and the 
+    Maximum time interval to 5000 mS (5 seconds). The sound card will pick a random length of time that is at least 2 seconds but no more than 5 seconds long. It will wait for this
+	random length of time, and when that time is up, it will play <span class="code">squeak2.wav</span>. Then it will select a new random length of time that again can be any value between 
+	2 and 5 seconds long. In other words, the Minimum interval is the minimum length of time that will ever pass before a squeak repeats itself while the 
+	Maximum interval is the maximum length of time before a squeak will repeat itself; but the actual length of time between those two extremes is selected at random.
+    </p>
+	
+    <p>
+	This random selection process continues for all enabled squeaks simultaneously so long as the throttle remains above the minimum speed setting.
+	</p>
+
+	<h4 class="entry">Enabled, Min, Max</h4>
+	<p>
+	Enable or disable each squeak, and set a minimum and maximum interval for it to repeat. 
+	</p>
+	
+	<h4 class="entry">Minimum Speed Before Squeaking</h4>
+	<p>
+	Set the minimum throttle speed that must be reached before the random squeaking process can begin. 
+    </p>
+		
+
+    <!-- LIGHTS
+      ---------------------------------------------------------------------------------------------------------------------------------
+      -->
+    <h2 id="lights">Light Settings</h2>
+	<p>
+    There are 3 light outputs on the sound card. These can be controlled directly through the Light functions, or indirectly through the Cannon Fire and Machine Gun functions.
+    Each light has three settings:
+    </p>
+    
+	<h4 class="entry">Flash - Time</h4>
+	<p>		
+	This setting defines the length of time in milliseconds (1,000 mS = 1 second) that the selected light will stay on for the Flash effect. 
+    You can call the Flash effect directly for any light but it also occurs automatically with the Cannon Fire function. When flashed, the light turns on for 
+    the time defined here after which it will be automatically turned back off. 
+	</p>
+	
+	<h4 class="entry">Blink - On and Off Time</h4>
+	<p>		
+	Here you can set precisely both the on and off times that make up a blinking effect, in milliseconds (1,000 mS = 1 second). You can call the Blink effect directly 
+    for any light but it also occurs automatically with the Machine Gun function. 
+	</p>
+    
+    
+    <!-- ENGINE SETTINGS
+      ---------------------------------------------------------------------------------------------------------------------------------
+      -->    
+    <h2 id="engine">Engine Settings</h2>
+	<p>
+	</p>
+	
+	<h4 class="entry">Throttle Stick - Center or Low Idle</h4>
+	<p>	
+    Specify what stick position on your transmitter is considered "idle." For most RC surface vehicles (cars, tanks, etc) center stick is considered idle (1500 uS PWM). 
+    For most RC aircraft the idle position will be at one extreme considered the "low" side. If necessary you can check the Reverse box for Channel 1 on the 
+    <a href="radio.html">Radio tab</a> so that the throtle direction matches that of your transmitter. 
+	</p>
+
+	<h4 class="entry">Auto-Start Engine with Throttle</h4>
+	<p>
+	If you don't want to use a separate switch channel function to turn on the engine, you can check this option. 
+	The engine will automatically be started the first time you move the throttle forward (throttle stick must be moved to more than half throttle).
+	</p>
+
+	<h4 class="entry">Auto-Stop Engine when Idle</h4>
+	<p>
+	If you would like the engine to automatically turn off after it has been sitting at idle for some length of time, specify the time here in minutes. If set to 
+    zero (0) the effect is disabled and engine will idle indefinitely or until you specifically turn it off using the Engine Off function assigned to another switch channel. 
+	</p>
+	
+	
+    <!-- RECOIL SERVO
+      ---------------------------------------------------------------------------------------------------------------------------------
+      -->    
+    <h2 id="recoil">Recoil Servo Settings</h2>
+	<p>
+	The sound card is able to control a standard RC hobby servo that can be used to recoil a cannon barrel in model RC tanks. The recoil servo action will occur automatically when the 
+    Cannon Fire function is activated by a switch channel. Note that the sound card can only provide about 500 mAh current to the servo output, if your servo draws more than this you should
+    power it with a separate BEC. 
+	</p>
+	
+    <p>
+    The settings here allow us to precisely control the speed of the recoil and the speed of the barrel's return to battery ("return to battery" means the barrel is fully extended). 
+    </p>
+    
+	<h4 class="entry">Reverse</h4>
+	<p>
+	Check this option to reverse the recoil servo.
+	</p>
+    
+	<h4 class="entry">Time to Recoil</h4>
+	<p>
+	Set the amount of time the servo takes to "recoil" (pull back) the barrel when the cannon is fired, in milliseconds (1,000 mS = 1 second). When the recoil action starts, the servo will be told 
+	to go directly to the opposite extreme (recoil). But servos take time to rotate and there is no way for the sound card to know when the servo arrives at the opposite extreme. This setting tells the 
+    sound card how long to wait before it starts to move the servo back in the opposite direction. 
+	</p>
+	
+    <p>
+	If you set Time to Recoil to a number that is too low, the servo will not reach the opposite extreme before it starts to return. If you set it to a number too high, the servo will recoil the barrel and 
+	then pause until the rest of the time expires, and only then move back in the opposite direction (this can be useful if you want a pause).
+    </p>
+    
+    <p>
+	This setting doesn't dictate how fast the servo should recoil - that is a hardware constraint of the servo which can't be changed. Instead, the purpose of this setting is to <i>tell the sound card</i>
+	how long the servo takes to recoil.
+    </p>
+	
+    <p>
+	Some trial and error will probably be necessary to determine the correct time for your servo and application. However all servos today are sold with published specifications regarding their speed which 
+	can be used as a starting point. Typically the speed is listed as the time it takes for the servo to rotate 60 degrees at 5 volts under no load. Of course in practice your servo may be moving up to 
+	90 degrees or more, and it will be under a load. A good starting point is to multiply the 60 degree time by 1.5 and adjust from there. 
+	</p>
+	
+	<h4 class="entry">Time to Return</h4>
+	<p>
+	This is how long the servo should take to return the barrel to "battery" (re-extend the barrel) after the recoil action. Typically we <i>want</i> this to be a slow movement, so the servo's max speed
+	is not a limitation as it is with the previous setting. The sound card can't make a servo go any faster than it is physically capable of, but it can easily make it go slower. So although <b>Time to Recoil</b> is a 
+	setting that requires some trial and error, with <b>Time to Return</b> you can simply enter directly the value you want. For example if you want the barrel to take 2 seconds to return, simply enter 2000 as the value
+	and that is precisely how long it will take. 
+	</p>    
+    
+    <h3>Servo End Points</h3>
+    <p>
+    Because the recoil servo is controlled by the sound card rather than directly from your transmitter, you can not adjust end-points of the servo travel using your transmitter. Instead you can adjust them here,
+    though it might be useful to connect the servo directly to your RC receiver first, adjust the endpoints on your transmitter using a temporary channel, then record those end points and copy the values here. 
+    </p>
+    <h4 class="entry">Recoil position</h4>
+    <p>
+    This is how far the servo travels in the recoiled position (barrel pulled back). Values can be from 70% to 120% of normal servo travel.
+    </p>
+    
+    <h4 class="entry">Battery position</h4>
+    <p>
+    This is how far the servo travels in the battery position (barrel returned forward). Values can be from 70% to 120% of normal servo travel.
+    </p>
+
+
+<br />
+<br />
+<br />
+
+</body>
+
+</html>
+
+

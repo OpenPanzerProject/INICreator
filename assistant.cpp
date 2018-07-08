@@ -95,12 +95,12 @@ bool Assistant::startAssistant()
         QStringList args;
         args << QLatin1String("-collectionFile")
              << QApplication::applicationDirPath()
-              + QLatin1String("/assistant/help_files/opconfighelp.qhc")
+              + QLatin1String("/assistant/help_files/opsoundhelp.qhc")
              << QLatin1String("-enableRemoteControl");
         proc->start(app, args);
 
         if (!proc->waitForStarted()) {
-            QMessageBox::critical(0, QObject::tr("OP Config"),
+            QMessageBox::critical(0, QObject::tr("Open Panzer Sound"),
                 QObject::tr("Unable to launch Qt Assistant (%1)").arg(app));
             return false;
         }

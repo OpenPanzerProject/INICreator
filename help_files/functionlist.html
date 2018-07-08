@@ -1,0 +1,97 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Function List</title>
+	<link rel="stylesheet" type="text/css" href="opsoundhelp.css">
+</head>
+
+
+<body>
+
+	<div id="toc">
+		<h3>Topics</h3>
+		<ul>
+			<li><a href="#special">Special Functions</a></li>
+			<li><a href="#switch">Switch Functions</a></li>
+		</ul>
+	</div>
+
+	<h1>Functions</h1>
+	
+    <p>
+    This page describes all the possible functions that can be assigned to radio channels. As discussed in the <a href="radio.html">Radio section</a>, there are two channel 
+    types. Channels of type "Switch" will have functions assigned to the various switch positions of that channel. In the special case of non-switch channel types, the type itself
+    represents the function of that channel (engine speed, volume, etc.)
+    </p>
+    
+    <p>
+    Note that some switch functions require you to specify additional details such as a number or action. In the example below, Channel 1 is assigned the Engine Speed type, which describes
+    the functio of that channel. The Channel 2 switch will be used to start and stop the engine, and those functions stand alone.
+    </p>
+    
+    <p>
+    However the Cannon Fire function on Channel 3 requires a number to be specified to indicate which cannon is to be fired, in the example we are firing Cannon #1. 
+    Similarly we can see that we are also using Channel 3 to fire the MG and we have specified the #2 machine gun. The MG function also requires an action for each position, in the example 
+    we have selected Stop and Start.
+    </p>
+
+    <div align="center">
+        <img src="images/functionexample.png" /><br />
+        <i>Different types of functions</i>
+    </div>
+
+    <h2 id="special">Function List - Special cases</h2>
+    <ul>
+        <li><b>Engine Speed:</b> Engine Speed is optional but if used will always be assigned to channel 1, which you should connect to the throttle channel of your RC receiver. 
+        The sound card will monitor this channel and play the various engine sounds appropriate to the speed of your model (see the <a href="soundfiles.html">Sound Files Reference</a> for 
+        more details on these sounds). Further settings related to the throttle channel can be made on the <a href="settings.html#engine">Settings tab</a>.
+        </li>
+        <li><b>Volume:</b> The Volume channel is optional but if used will always be assigned to channel 5. This channel type allows you to control the master volume of the sound card 
+        from your transmitter, ideally from a potentiometer/knob.
+        </li>
+    </ul>
+    
+    <h2 id="switch">Function List - "Switch" Channels</h2>
+    <ul>
+        <li><b>Start Engine:</b> Start playing the engine sounds beginning with the engine startup sound, followed by the engine idle sound and controlled from there by the position of your throttle channel.</li>
+        <li><b>Stop Engine:</b> Play the engine shutdown sound.</li>
+        <li><b>Toggle Engine:</b> Start the engine if it is stopped, or stop it if it is already started.</li>
+        <li><b>Cannon Fire:</b> Play one of up to three cannon fire sounds, determined by the number chosen. The cannon fire function does more than just play a sound:
+            <ul>
+                <li><b>Cannon #1: </b>The <span class="code">cannonf.wav</span> file will be played, the Light 1 output will flash, <b><i>and</i></b> the servo recoil effect will be performed.</li>
+                <li><b>Cannon #2: </b>The <span class="code">cannonf2.wav</span> file will be played, the Light 2 output will flash, but <b>no</b> servo recoil will occur.</li>
+                <li><b>Cannon #3: </b>The <span class="code">cannonf3.wav</span> file will be played, the Light 3 output will flash, but <b>no</b> servo recoil will occur.</li>
+            </ul>
+            The flash time of each light output, and further settings related to the recoil servo can be found on the <a href="settings.html">Settings tab</a>.
+        </li>
+        <li><b>Machine Gun:</b> The machine gun function requires both a number to be specified (1, 2 or 3) and an action to be performed which can be Start, Stop, or Toggle. Unlike the cannon sound for example, which plays once and stops, 
+        when you <b>Play</b> the machine gun sound it will continue to repeat until you specifically tell it to <b>Stop</b>. Alternatively you can use the <b>Toggle</b> action to start/stop it with only a single switch position. 
+        Whenever the machine gun sound is playing the associated Light output (1, 2 or 3) will also blink at the rate specified on the <a href="settings.html">Settings tab</a>. 
+        </li>
+        <li><b>User Sound:</b> This function controls the user sounds (<span class="code">userX.wav</span> where <span class="code">X</span> is a number from 1 to 22). The number selects the sound (1 through 22) and the action can be <b>Play</b>, <b>Stop</b>, or <b>Repeat</b>. When <b>Play</b>ed the sound
+        will continue to play until it completes or until you specifically <b>Stop</b> it. If you <b>Repeat</b> the sound it will continue to play over and over until you specifically <b>Stop</b> it.</li>
+        <li><b>Light:</b> Controls the selected Light output (1, 2 or 3). The possible actions are:
+            <ul>
+                <li><b>On:</b> Will turn Light output (1, 2 or 3) on, and if present, will also play the <span class="code">lightX.wav</span> sound file (where <span class="code">X</span> is 1, 2 or 3).</li>
+                <li><b>Off:</b> Will turn Light output (1, 2 or 3) off, and if present, will also play the <span class="code">lightX.wav</span> sound file (where <span class="code">X</span> is 1, 2 or 3).</li>
+                <li><b>Toggle:</b> Will alternate the Light output (1, 2 or 3) state between On and Off.</li>
+                <li><b>Start Blink:</b> Will start blinking Light output (1, 2 or 3) at the rate specified on the <a href="settings.html">Settings tab</a>. The light will continue to blink indefinitely until you call the Off function. No sound is played.</li>
+                <li><b>Toggle Blink:</b> Will toggle the Light output (1, 2 or 3) between the Blinking and Off states. No sound is played.</li>
+                <li><b>Flash:</b> Will flash (turn on momentarily) the Light output (1, 2 or 3) for the length of time specified on the <a href="settings.html">Settings tab</a>. No sound is played. If you want a sound to play
+                during Flash, use the Cannon Fire function instead.</li>
+            </ul>
+        </li>
+    </ul>
+
+
+<br />
+<br />
+<br />
+
+
+</body>
+
+</html>
+
+
