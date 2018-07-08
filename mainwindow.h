@@ -1,4 +1,4 @@
-/* OPConfig 		Configuration program for the Open Panzer Sound Card
+/* INI Creator 		INI Creator Utility for the Open Panzer Sound Card
  * Source: 			openpanzer.org
  * Authors:    		Luke Middleton
  *
@@ -133,7 +133,7 @@ private slots:
     // Slots for the Assistant (help documentation) and the About menu
     // ---------------------------------------------------------------------------------------------------->>
       void showDocumentation();
-      void AboutOP();
+      void About();
       void showPageDocumentation(QString file);
 
     // Slots for the Tools menu
@@ -252,6 +252,8 @@ private:
       void SerialStatus_SetConnected();
       void SerialStatus_SetNotConnected();
       void SerialStatus_SetAttemptFlash();
+      void SerialStatus_Show();
+      void SerialStatus_Hide();
 
     // COM Check timer
       QTimer *COMCheckTimer;             // This timer will be used to poll the COM ports and update the list if any new devices are found

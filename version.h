@@ -13,13 +13,13 @@
 
 #define VER_COPYRIGHT_YEAR_STR      "2018"      // Change it below as well v
 #define VER_COMPANYNAME_STR         "OpenPanzer.org"
-#define VER_FILEDESCRIPTION_STR     "OP Sound INI Creator"
-#define VER_INTERNALNAME_STR        "OP Sound INI Creator"
+#define VER_FILEDESCRIPTION_STR     "INI Creator for the Open Panzer Sound Card"
+#define VER_INTERNALNAME_STR        "INI Creator for the Open Panzer Sound Card"
 #define VER_LEGALCOPYRIGHT_STR      "Copyright (C) 2018 OpenPanzer.org"
 #define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"
 #define VER_LEGALTRADEMARKS2_STR    VER_LEGALTRADEMARKS1_STR
 #define VER_ORIGINALFILENAME_STR    "OPSound.exe"
-#define VER_PRODUCTNAME_STR         "OP Sound INI Creator"
+#define VER_PRODUCTNAME_STR         "INI Creator for the Open Panzer Sound Card"
 
 #define VER_COMPANYDOMAIN_STR       "openpanzer.org"
 

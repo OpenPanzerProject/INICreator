@@ -36,11 +36,12 @@
         <file>images/subheader.png</file>
         <file>images/opsound.png</file>
         <file>images/OPS.png</file>
+        <file>images/INICreator.png</file>
     </qresource>
     <qresource prefix="/icons">
-        <file>images/OS_Icon_16.png</file>
-        <file>images/OS_Icon_32.png</file>
-        <file>images/OS_Icon_48.png</file>
-        <file>images/OS_Icon_256.png</file>
+        <file>images/IC_Icon_16.png</file>
+        <file>images/IC_Icon_32.png</file>
+        <file>images/IC_Icon_48.png</file>
+        <file>images/IC_Icon_256.png</file>
     </qresource>
 </RCC>

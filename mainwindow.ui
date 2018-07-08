@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>OP Sound INI Creator</string>
+   <string>  INI Creator Utility for the Open Panzer Sound Card</string>
   </property>
   <property name="styleSheet">
    <string notr="true">/* ----------------------------------------------------------------------------------------------------------------------------*/
@@ -463,7 +463,7 @@ QSizeGrip {
             <rect>
              <x>10</x>
              <y>10</y>
-             <width>421</width>
+             <width>441</width>
              <height>31</height>
             </rect>
            </property>
@@ -471,7 +471,7 @@ QSizeGrip {
             <bool>false</bool>
            </property>
            <property name="styleSheet">
-            <string notr="true">	background: url(:/images/OPS.png) no-repeat; </string>
+            <string notr="true">background: url(:/images/INICreator.png) no-repeat; </string>
            </property>
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
@@ -551,7 +551,7 @@ QSizeGrip {
             <rect>
              <x>10</x>
              <y>9</y>
-             <width>631</width>
+             <width>571</width>
              <height>21</height>
             </rect>
            </property>
@@ -5760,7 +5760,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <addaction name="actionHelp_Contents"/>
     <addaction name="actionCheck_for_Updates"/>
     <addaction name="separator"/>
-    <addaction name="actionAbout_OP_Config"/>
+    <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
@@ -5837,9 +5837,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Check for Updates</string>
    </property>
   </action>
-  <action name="actionAbout_OP_Config">
+  <action name="actionAbout">
    <property name="text">
-    <string>About OP Sound</string>
+    <string>About INI Creator</string>
    </property>
   </action>
   <action name="actionResetAllVals">

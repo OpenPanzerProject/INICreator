@@ -1,4 +1,4 @@
-/* OPConfig 		Configuration program for the Open Panzer Sound Card
+/* INI Creator 		INI Creator Utility for the Open Panzer Sound Card
  * Source: 			openpanzer.org
  * Authors:    		Luke Middleton
  *
@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
 
     // Window icon
-    setWindowIcon(QIcon(":/icons/images/OS_Icon_32.png"));
+    setWindowIcon(QIcon(":/icons/images/IC_Icon_32.png"));
 
     // Create our assistant for help documentation
     assistant = new Assistant;
@@ -169,6 +169,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     container->setLayout(layout);
     ui->statusBar->addPermanentWidget(container,1);
 
+    // Now hide the serial status info to start
+    SerialStatus_Hide();
+
 
     // SETUP THE TABS
     // ---------------------------------------------------------------------------------------------------------------------------------->>
@@ -287,11 +290,11 @@ void MainWindow::changeStackedWidget(const QModelIndex& current, const QModelInd
     ui->stackedWidgetMain->setFocus();
 
     // Likewise if wer'e moving off the Firmware tab and we were snooping, we stop the snooping because it's of no use
-    // if we can't see it, and while snooping is enabled we can't connect, which is annoying if you are on another tab
-    // and want to connect
-    if (ui->stackedWidgetMain->currentIndex() != TAB_INDEX_FIRMWARE && comm->isSnooping())
+    // if we can't see it
+    if (ui->stackedWidgetMain->currentIndex() != TAB_INDEX_FIRMWARE)
     {
-        comm->closeSerial();
+        if (comm->isSnooping()) comm->closeSerial();
+        SerialStatus_Hide();    // Also hide the serial status info since it isn't used in this application other than on the console
     }
 }
 // Uncomment the below if compiling in Qt 5.6
@@ -308,16 +311,16 @@ void MainWindow::ShowHideHeader()
     if (ui->frmHeader->isHidden())
     {
         ui->frmHeader->show();
-        setMinimumHeight(788);
-        resize(width(), 788);
+        setMinimumHeight(698);
+        resize(width(), 698);
     }
     else
     {
-        // Hide the "OPEN PANZER OP CONFIG" header bar along the top of the application window. This can be useful
+        // Hide the "INI CREATOR UTILITY" header bar along the top of the application window. This can be useful
         // for those with small screens
         ui->frmHeader->hide();
-        setMinimumHeight(733);
-        resize(width(), 733);
+        setMinimumHeight(643);
+        resize(width(), 643);
     }
 }
 void MainWindow::cmdTest1_Click()
@@ -396,29 +399,42 @@ void MainWindow::setBaudRate()
 
 void MainWindow::SerialStatus_SetAttemptConnect()
 {
+    SerialStatus_Show();
     serialStatusLabel->setText(tr("Attempting to connect to %1 (%2)...") .arg(comm->currentPortSettings.name).arg(comm->currentPortSettings.stringBaudRate));
         qApp->processEvents();  // Equivalent of VB DoEvents()
 }
 void MainWindow::SerialStatus_SetNotConnected()
 {
+    SerialStatus_Show();
     serialStatusLabel->setText(tr("Not connected"));
     // Red box
     connectFrame->setStyleSheet("QFrame { background-color: #FF0632; border: 1px solid white; border-radius: 2px; }");
 }
 void MainWindow::SerialStatus_SetConnected()
 {
+    SerialStatus_Show();
     serialStatusLabel->setText(tr("Connected to %1 (%2)") .arg(comm->currentPortSettings.name).arg(comm->currentPortSettings.stringBaudRate));
     // Green box
     connectFrame->setStyleSheet("QFrame { background-color: #01D826; border: 1px solid white; border-radius: 2px; }");
 }
 void MainWindow::SerialStatus_SetAttemptFlash()
 {
+    SerialStatus_Show();
     serialStatusLabel->setText(tr("Attempting to flash..."));
     // Neutral box - we don't know yet if successful or not
     connectFrame->setStyleSheet("QFrame { background-color: #E1E3E3; border: 1px solid white; border-radius: 2px; }");
             qApp->processEvents();  // Equivalent of VB DoEvents()
 }
-
+void MainWindow::SerialStatus_Hide()
+{
+    serialStatusLabel->hide();
+    connectFrame->hide();
+}
+void MainWindow::SerialStatus_Show()
+{
+    serialStatusLabel->show();
+    connectFrame->show();
+}
 
 
 //------------------------------------------------------------------------------------------------------------------------>>
@@ -522,8 +538,8 @@ void MainWindow::initActionsConnections()
     ui->actionCheck_for_Updates->setEnabled(true);
     connect(ui->actionCheck_for_Updates, SIGNAL(triggered(bool)), this, SLOT(checkForUpdates()));
 
-    ui->actionAbout_OP_Config->setEnabled(true);
-    connect(ui->actionAbout_OP_Config, SIGNAL(triggered()), this, SLOT(AboutOP()));
+    ui->actionAbout->setEnabled(true);
+    connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(About()));
 
 }
 
@@ -656,7 +672,7 @@ int MainWindow::msgBox(QString msg, ButtonCollection buttons=vbOkOnly, QString t
 //------------------------------------------------------------------------------------------------------------------------>>
 // ABOUT DIALOG
 //------------------------------------------------------------------------------------------------------------------------>>
-void MainWindow::AboutOP()
+void MainWindow::About()
 {
     QMessageBox about;
 
@@ -675,7 +691,7 @@ void MainWindow::AboutOP()
     infoText.append(VER_COPYRIGHT_YEAR_STR);
     infoText.append(" <a href='http://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");
 
-    about.setWindowTitle("  OP Sound INI Creator");
+    about.setWindowTitle("  INI Creator");
     about.setTextFormat(Qt::RichText);   //this is what makes the links clickable
     about.setText("An ini-file creator utility for the&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />Open Panzer Sound Card.");
     //about.setInformativeText("<span style='font-size: 12px;'>Version 1.0<br /><br />&#169; 2016 <a href='http://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");

@@ -1,4 +1,4 @@
-IC01 ICON "images/opsound.ico"
+IC01 ICON "images/inicreator.ico"
 
 #include <windows.h>
 #include <winver.h>

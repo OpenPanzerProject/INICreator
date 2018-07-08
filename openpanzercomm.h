@@ -1,10 +1,3 @@
-/* OP_PCComm.h			Open Panzer PC Communication
- * Version 1.0   		July 2015
- * Copyright 2015		Luke Middleton	openpanzer.org
- *
- */
-
-
 #ifndef OPENPANZERCOMM_H
 #define OPENPANZERCOMM_H
 
