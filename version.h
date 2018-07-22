@@ -18,7 +18,7 @@
 #define VER_LEGALCOPYRIGHT_STR      "Copyright (C) 2018 OpenPanzer.org"
 #define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"
 #define VER_LEGALTRADEMARKS2_STR    VER_LEGALTRADEMARKS1_STR
-#define VER_ORIGINALFILENAME_STR    "OPSound.exe"
+#define VER_ORIGINALFILENAME_STR    "INICreator.exe"
 #define VER_PRODUCTNAME_STR         "INI Creator for the Open Panzer Sound Card"
 
 #define VER_COMPANYDOMAIN_STR       "openpanzer.org"
