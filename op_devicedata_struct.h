@@ -47,6 +47,7 @@ struct _device_data {
 
 // Throttle
     boolean centerThrottle;                      // If true, stick centered = idle, if false stick at low position = idle
+    uint8_t idleDeadband;                        // Percentage of throttle movement to ignore around idle position
 
 // Engine
     boolean EngineAutoStart;					 // If true, engine will auto-start on first blip of throttle. If false, start engine with user selected trigger.

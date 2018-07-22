@@ -4511,7 +4511,7 @@ QSizeGrip {
                   <x>740</x>
                   <y>0</y>
                   <width>371</width>
-                  <height>201</height>
+                  <height>251</height>
                  </rect>
                 </property>
                 <property name="frameShape">
@@ -4649,7 +4649,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>110</y>
+                   <y>140</y>
                    <width>181</width>
                    <height>21</height>
                   </rect>
@@ -4667,7 +4667,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>140</y>
+                   <y>170</y>
                    <width>181</width>
                    <height>21</height>
                   </rect>
@@ -4685,7 +4685,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>210</x>
-                   <y>112</y>
+                   <y>142</y>
                    <width>16</width>
                    <height>18</height>
                   </rect>
@@ -4698,7 +4698,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>290</x>
-                   <y>160</y>
+                   <y>190</y>
                    <width>81</width>
                    <height>21</height>
                   </rect>
@@ -4716,7 +4716,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>210</x>
-                   <y>140</y>
+                   <y>170</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>
@@ -4732,7 +4732,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>290</x>
-                   <y>140</y>
+                   <y>170</y>
                    <width>51</width>
                    <height>21</height>
                   </rect>
@@ -4746,12 +4746,61 @@ QSizeGrip {
                   <string>minutes</string>
                  </property>
                 </widget>
+                <widget class="QLabel" name="label_37">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>109</y>
+                   <width>91</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Idle deadband</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinIdleDeadband">
+                 <property name="geometry">
+                  <rect>
+                   <x>210</x>
+                   <y>110</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="maximum">
+                  <number>20</number>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_38">
+                 <property name="geometry">
+                  <rect>
+                   <x>290</x>
+                   <y>110</y>
+                   <width>81</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>(0-20 %)</string>
+                 </property>
+                </widget>
                </widget>
                <widget class="FrameContent" name="frmServo">
                 <property name="geometry">
                  <rect>
                   <x>740</x>
-                  <y>210</y>
+                  <y>260</y>
                   <width>371</width>
                   <height>251</height>
                  </rect>
@@ -4979,7 +5028,7 @@ QSizeGrip {
                   </font>
                  </property>
                  <property name="text">
-                  <string>(70-120%)</string>
+                  <string>(70-125%)</string>
                  </property>
                 </widget>
                 <widget class="QSpinBox" name="spinEndPointRecoil">
@@ -4995,7 +5044,7 @@ QSizeGrip {
                   <number>70</number>
                  </property>
                  <property name="maximum">
-                  <number>120</number>
+                  <number>125</number>
                  </property>
                  <property name="value">
                   <number>100</number>
@@ -5050,7 +5099,7 @@ QSizeGrip {
                   <number>70</number>
                  </property>
                  <property name="maximum">
-                  <number>120</number>
+                  <number>125</number>
                  </property>
                  <property name="value">
                   <number>100</number>
@@ -5071,7 +5120,7 @@ QSizeGrip {
                   </font>
                  </property>
                  <property name="text">
-                  <string>(70-120%)</string>
+                  <string>(70-125%)</string>
                  </property>
                 </widget>
                </widget>

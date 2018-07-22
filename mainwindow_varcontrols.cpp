@@ -75,6 +75,7 @@ void MainWindow::Variables_to_Controls(void)
     // Throttle position
     ui->radioCenterIdle->setChecked(DeviceData.centerThrottle);
     ui->radioLowIdle->setChecked(!DeviceData.centerThrottle);
+    ui->spinIdleDeadband->setValue(DeviceData.idleDeadband);
 
     // Lights
     ui->spinLight1Flash_mS->setValue(DeviceData.Light1FlashTime_mS);
@@ -163,6 +164,7 @@ void MainWindow::Controls_to_Variables(void)
     // Throttle position
     if (ui->radioCenterIdle->isChecked()) DeviceData.centerThrottle = true;
     else if (ui->radioLowIdle->isChecked()) DeviceData.centerThrottle = false;
+    DeviceData.idleDeadband = ui->spinIdleDeadband->value();
 
     // Lights
     DeviceData.Light1FlashTime_mS = ui->spinLight1Flash_mS->value();

@@ -89,6 +89,7 @@ void MainWindow::loadVariableDefaults(void)
 
     // Throttle position
     DeviceData.centerThrottle = true;
+    DeviceData.idleDeadband = 5;
 
     // Lights
     DeviceData.Light1FlashTime_mS = 30;
@@ -323,6 +324,7 @@ void MainWindow::readSettingsFromFile(QString filename, boolean confirm)
     {
         QString key = keys.at(i).toLocal8Bit().constData();
         if (key == "centerthrottle") DeviceData.centerThrottle = settings.value(key, 0).toBool();
+        if (key == "idledeadband")   DeviceData.idleDeadband   = settings.value(key, 0).toUInt();
     }
     settings.endGroup();
 
@@ -463,6 +465,7 @@ void MainWindow::writeSettingsToFile()
         // -------------------------------------------------------------------------------------------------------------->>
         settingsTo->beginGroup("throttle");
         settingsTo->setValue(QString("centerthrottle"), static_cast<uint>(DeviceData.centerThrottle));
+        settingsTo->setValue(QString("idledeadband"), DeviceData.idleDeadband);
         settingsTo->endGroup();
 
         // Lights
