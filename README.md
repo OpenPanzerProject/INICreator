@@ -10,7 +10,7 @@ This repository contains the source code for the INI Creator Utility, written in
 ## Further Resources
   * For more information on the Open Panzer project, see the [OpenPanzer Wiki](http://wiki.openpanzer.org).
   * To discuss the project, feel free to join the [Open Panzer Community](http://openpanzer.org/forum/index.php?action=forum).
-  * To download a compiled version of OP Config for installation in Windows, see the [Open Panzer Downloads page](http://www.openpanzer.org/downloads). 
+  * To download a compiled version of INI Creator for installation in Windows, see the [Open Panzer Downloads](http://www.openpanzer.org/downloads#sound) page. 
 
 ## License
 Source files for the INI Creator are free software: you can redistribute them and/or modify them under the terms of the GNU General Public License version 3 as published by the Free Software Foundation.
