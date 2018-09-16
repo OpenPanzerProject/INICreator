@@ -37,11 +37,12 @@ void MainWindow::Variables_to_Controls(void)
             // Some functions requires numbers and actions
             SaveChannelSwitchAction(switchFunctionCombo[i + j], i, j);     // First make sure all options are shown/hidden correctly
             if (DeviceData.RCChannel[i].swFunction[j] == SF_USER ||
+                DeviceData.RCChannel[i].swFunction[j] == SF_SOUNDBANK ||
                 DeviceData.RCChannel[i].swFunction[j] == SF_MG   ||
                 DeviceData.RCChannel[i].swFunction[j] == SF_LIGHT||
                 DeviceData.RCChannel[i].swFunction[j] == SF_CANNON_FIRE)
             {
-                actionNumCombo[start_interval + j]->setCurrentText(QString::number(DeviceData.RCChannel[i].actionNum[j]));
+                actionNumCombo[start_interval + j]->setCurrentIndex(actionNumCombo[start_interval + j]->findData(DeviceData.RCChannel[i].actionNum[j]));
                 switchActionCombo[start_interval + j]->setCurrentIndex(switchActionCombo[start_interval + j]->findData(DeviceData.RCChannel[i].switchAction[j]));
             }
 
@@ -88,6 +89,10 @@ void MainWindow::Variables_to_Controls(void)
     ui->spinLight3BlinkOn_mS->setValue(DeviceData.Light3BlinkOnTime_mS);
     ui->spinLight3BlinkOff_mS->setValue(DeviceData.Light3BlinkOffTime_mS);
 
+    // Sound bank
+    ui->chkSBALoop->setChecked(DeviceData.SoundBankA_Loop);
+    ui->chkSBBLoop->setChecked(DeviceData.SoundBankB_Loop);
+
     // Servo
     ui->spinRecoilTimeToRecoil->setValue(DeviceData.ServoTimeToRecoil);
     ui->spinRecoilTimeToReturn->setValue(DeviceData.ServoTimeToReturn);
@@ -130,7 +135,7 @@ void MainWindow::Controls_to_Variables(void)
             {
                 DeviceData.RCChannel[i].swFunction[j] = switchFunctionCombo[start_interval + j]->getCurrentSwitchFunction();
                 DeviceData.RCChannel[i].switchAction[j] = switchActionCombo[start_interval + j]->getCurrentSwitchAction();
-                DeviceData.RCChannel[i].actionNum[j] = actionNumCombo[start_interval + j]->currentText().toInt();
+                DeviceData.RCChannel[i].actionNum[j] = actionNumCombo[start_interval + j]->currentData().toInt();
                 DeviceData.RCChannel[i].swFunctionID[j] = switchSettingsToID(DeviceData.RCChannel[i].swFunction[j], DeviceData.RCChannel[i].switchAction[j], DeviceData.RCChannel[i].actionNum[j]);
                 // qDebug() << "Channel " << i + 1 << " Position " << j + 1 << "Function " << DeviceData.RCChannel[i].swFunction[j] << " Action " << DeviceData.RCChannel[i].switchAction[j] << " Num " << DeviceData.RCChannel[i].actionNum[j] << " ID " << DeviceData.RCChannel[i].swFunctionID[j];
             }
@@ -176,6 +181,10 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.Light3FlashTime_mS = ui->spinLight3Flash_mS->value();
     DeviceData.Light3BlinkOnTime_mS = ui->spinLight3BlinkOn_mS->value();
     DeviceData.Light3BlinkOffTime_mS = ui->spinLight3BlinkOff_mS->value();
+
+    // Sound bank
+    DeviceData.SoundBankA_Loop = ui->chkSBALoop->isChecked();
+    DeviceData.SoundBankB_Loop = ui->chkSBBLoop->isChecked();
 
     // Servo
     DeviceData.ServoReversed = ui->chkRecoilServoReversed->isChecked();

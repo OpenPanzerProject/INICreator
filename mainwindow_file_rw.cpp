@@ -102,6 +102,10 @@ void MainWindow::loadVariableDefaults(void)
     DeviceData.Light3BlinkOnTime_mS = 30;
     DeviceData.Light3BlinkOffTime_mS = 30;
 
+    // Sound bank
+    DeviceData.SoundBankA_Loop = false;
+    DeviceData.SoundBankB_Loop = false;
+
     // Servo
     DeviceData.ServoReversed = false;
     DeviceData.ServoTimeToRecoil = 200;
@@ -347,6 +351,18 @@ void MainWindow::readSettingsFromFile(QString filename, boolean confirm)
     }
     settings.endGroup();
 
+    // Sound Bank
+    // -------------------------------------------------------------------------------------------------------------->>
+    settings.beginGroup("soundbank");
+    keys = settings.childKeys();
+    for (int i = 0; i < keys.size(); ++i)
+    {
+        QString key = keys.at(i).toLocal8Bit().constData();
+        if (key == "SBA_loop") DeviceData.SoundBankA_Loop = settings.value(key, 0).toBool();
+        if (key == "SBB_loop") DeviceData.SoundBankB_Loop = settings.value(key, 0).toBool();
+    }
+    settings.endGroup();
+
     // Servo
     // -------------------------------------------------------------------------------------------------------------->>
     settings.beginGroup("servo");
@@ -480,6 +496,13 @@ void MainWindow::writeSettingsToFile()
         settingsTo->setValue(QString("l3_flash"), DeviceData.Light3FlashTime_mS);
         settingsTo->setValue(QString("l3_blinkon"), DeviceData.Light3BlinkOnTime_mS);
         settingsTo->setValue(QString("l3_blinkoff"), DeviceData.Light3BlinkOffTime_mS);
+        settingsTo->endGroup();
+
+        // Sound bank
+        // -------------------------------------------------------------------------------------------------------------->>
+        settingsTo->beginGroup("soundbank");
+        settingsTo->setValue(QString("SBA_loop"), static_cast<uint>(DeviceData.SoundBankA_Loop));
+        settingsTo->setValue(QString("SBB_loop"), static_cast<uint>(DeviceData.SoundBankB_Loop));
         settingsTo->endGroup();
 
         // Servo

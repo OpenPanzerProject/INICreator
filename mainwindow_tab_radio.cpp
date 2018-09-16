@@ -298,6 +298,7 @@ void MainWindow::SaveChannelSwitchAction(SwitchFunctionComboBox *, int ChannelNu
     switch (sf)
     {
         case SF_USER:
+        case SF_SOUNDBANK:
         case SF_MG:
         case SF_CANNON_FIRE:
         case SF_LIGHT:

@@ -69,8 +69,6 @@
         when you <b>Play</b> the machine gun sound it will continue to repeat until you specifically tell it to <b>Stop</b>. Alternatively you can use the <b>Toggle</b> action to start/stop it with only a single switch position. 
         Whenever the machine gun sound is playing the associated Light output (1, 2 or 3) will also blink at the rate specified on the <a href="settings.html">Settings tab</a>. 
         </li>
-        <li><b>User Sound:</b> This function controls the user sounds (<span class="code">userX.wav</span> where <span class="code">X</span> is a number from 1 to 22). The number selects the sound (1 through 22) and the action can be <b>Play</b>, <b>Stop</b>, or <b>Repeat</b>. When <b>Play</b>ed the sound
-        will continue to play until it completes or until you specifically <b>Stop</b> it. If you <b>Repeat</b> the sound it will continue to play over and over until you specifically <b>Stop</b> it.</li>
         <li><b>Light:</b> Controls the selected Light output (1, 2 or 3). The possible actions are:
             <ul>
                 <li><b>On:</b> Will turn Light output (1, 2 or 3) on, and if present, will also play the <span class="code">lightX.wav</span> sound file (where <span class="code">X</span> is 1, 2 or 3).</li>
@@ -81,6 +79,14 @@
                 <li><b>Flash:</b> Will flash (turn on momentarily) the Light output (1, 2 or 3) for the length of time specified on the <a href="settings.html">Settings tab</a>. No sound is played. If you want a sound to play
                 during Flash, use the Cannon Fire function instead.</li>
             </ul>
+        </li>
+        <li><b>User Sound:</b> This function controls the user sounds (<span class="code">userX.wav</span> where <span class="code">X</span> is a number from 1 to 20). The number selects the sound (1 through 20) and the action can be <b>Play</b>, <b>Stop</b>, or <b>Repeat</b>. When <b>Play</b>ed the sound
+        will continue to play until it completes or until you specifically <b>Stop</b> it. If you <b>Repeat</b> the sound it will continue to play over and over until you specifically <b>Stop</b> it.</li>
+        <li><b>Sound Bank:</b> This function is similar to user sounds except that instead of selecting a specific sound from a list, you play sounds from a list in sequential or descending order, or randomly. There are two lists of sounds
+        availalble called Sound Bank "A" or "B" with up to 20 sounds available in each list (<span class="code">a_bankX.wav</span> or <span class="code">b_bankX.wav</span> where <span class="code">X</span> is a number from 1 to 20). You can
+        play the <b>Next</b> sound, the <b>Previous</b> sound, or a <b>Random</b> sound. The <b>Play/Stop</b> will start or stop the current sound. If the <a href="settings.html#soundbank">Auto-Loop setting</a> is enabled the list will 
+        automatically start the subsequent song in the list after the current song ends (next, previous or random depending on whatever was used to initiate the first song), and continue to do so until Stop is called. If the Auto-Loop setting is not checked, each call to Next, Previous or Random will play only that single file 
+        and then stop until a new call is made to Next, Previous or Random. 
         </li>
     </ul>
 

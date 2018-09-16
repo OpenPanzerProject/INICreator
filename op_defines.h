@@ -15,7 +15,7 @@
 // -----------------------------------------------------------------------------------------------------
 #define DEFAULTBAUDRATE         115200      // Baud rate
 #define NUM_LIGHTS              3           // Number of light outputs
-#define MAX_NUM_USER_SOUNDS     22          // How many user sounds can the sound card handle
+#define MAX_NUM_USER_SOUNDS     20          // How many user sounds can the sound card handle
 
 // Channel types
 // -----------------------------------------------------------------------------------------------------
@@ -54,7 +54,8 @@ enum switch_function : uint8_t {
     SF_CANNON_FIRE,
     SF_MG,
     SF_LIGHT,
-    SF_USER
+    SF_USER,
+    SF_SOUNDBANK
 };
 
 
@@ -65,12 +66,15 @@ enum switch_function : uint8_t {
 // and the action defines whether to play it, stop it, or repeat it.
 enum switch_action : uint8_t {
     ACTION_NULL = 0,
-    ACTION_ONSTART = 1,
-    ACTION_OFFSTOP = 2,
-    ACTION_REPEATTOGGLE = 3,
-    ACTION_STARTBLINK = 4,
-    ACTION_TOGGLEBLINK = 5,
-    ACTION_FLASH = 6
+    ACTION_ONSTART = 1,             // Turn on, or start
+    ACTION_OFFSTOP = 2,             // Turn off, or stop
+    ACTION_REPEATTOGGLE = 3,        // Repeat, or toggle
+    ACTION_STARTBLINK = 4,          // Start blinking
+    ACTION_TOGGLEBLINK = 5,         // Toggle blinking
+    ACTION_FLASH = 6,               // Flash
+    ACTION_PLAYNEXT = 7,            // Sound bank - play next
+    ACTION_PLAYPREV = 8,            // Sound bank - play previous
+    ACTION_PLAYRANDOM = 9           // Sound bank - play random
 };
 
 

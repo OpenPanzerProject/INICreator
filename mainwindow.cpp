@@ -589,6 +589,7 @@ void MainWindow::SetupHelpButtons()
         connect(ui->hpbSoundVolumes, SIGNAL(released()), signalMapper, SLOT(map()));        // Volumes
         connect(ui->hpbSoundSqueaks, SIGNAL(released()), signalMapper, SLOT(map()));        // Squeak section
         connect(ui->hpbLights, SIGNAL(released()), signalMapper, SLOT(map()));              // Lights
+        connect(ui->hpbSoundBank, SIGNAL(released()), signalMapper, SLOT(map()));           // Sound Bank
         connect(ui->hpbEngine, SIGNAL(released()), signalMapper, SLOT(map()));              // Engine
         connect(ui->hpbServo, SIGNAL(released()), signalMapper, SLOT(map()));               // Recoil servo
     // Firmware tab
@@ -603,6 +604,7 @@ void MainWindow::SetupHelpButtons()
         signalMapper->setMapping(ui->hpbSoundVolumes, "settings.html#volumes");             // Volumes
         signalMapper->setMapping(ui->hpbSoundSqueaks, "settings.html#squeaks");             // Squeak settings
         signalMapper->setMapping(ui->hpbLights, "settings.html#lights");                    // Lights
+        signalMapper->setMapping(ui->hpbSoundBank, "settings.html#soundbank");              // Sound Bank
         signalMapper->setMapping(ui->hpbEngine, "settings.html#engine");                    // Engine
         signalMapper->setMapping(ui->hpbServo, "settings.html#recoil");                     // Recoil servo
     // Firmware

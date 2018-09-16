@@ -18,8 +18,13 @@ void ActionNumComboBox::setActionNums(switch_function sf)
         case SF_USER:
             for (int i=0; i<MAX_NUM_USER_SOUNDS; i++)
             {
-                this->insertItem(i+1, QString::number(i+1));
+                this->insertItem(i+1, QString::number(i+1),i+1);
             }
+            break;
+
+        case SF_SOUNDBANK:
+            this->insertItem(1,"A",1);
+            this->insertItem(2,"B",2);
             break;
 
         case SF_MG:                 // Same as number of lights
@@ -27,7 +32,7 @@ void ActionNumComboBox::setActionNums(switch_function sf)
         case SF_LIGHT:
             for (int i=0; i<NUM_LIGHTS; i++)
             {
-                this->insertItem(i+1, QString::number(i+1));
+                this->insertItem(i+1, QString::number(i+1),i+1);
             }
             break;
 

@@ -21,6 +21,13 @@ void SwitchActionComboBox::setActions(switch_function sf)
             this->insertItem(2, "Stop", ACTION_OFFSTOP);
             break;
 
+        case SF_SOUNDBANK:
+            this->insertItem(0, "Play/Stop", ACTION_ONSTART);
+            this->insertItem(1, "Next", ACTION_PLAYNEXT);
+            this->insertItem(2, "Previous", ACTION_PLAYPREV);
+            this->insertItem(3, "Random", ACTION_PLAYRANDOM);
+            break;
+
         case SF_MG:
             this->insertItem(0, "Start", ACTION_ONSTART);
             this->insertItem(1, "Stop", ACTION_OFFSTOP);

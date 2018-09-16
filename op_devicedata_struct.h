@@ -23,6 +23,9 @@ struct _device_data {
     boolean  TurretSound_Enabled;				 // Is turret rotation sound enabled or not
     boolean  BarrelSound_Enabled;                // Is barrel elevation sound enabled or not
 
+    boolean  SoundBankA_Loop;                    // Should sounds in Sound Bank A play continuously
+    boolean  SoundBankB_Loop;                    // Should sounds in Sound Bank B play continuously
+
     uint8_t  VolumeEngine;                       // Relative, not absolute volumes
     uint8_t  VolumeTrackOverlay;                 // Relative, not absolute volumes
     uint8_t  VolumeEffects;                      // Relative, not absolute volumes
