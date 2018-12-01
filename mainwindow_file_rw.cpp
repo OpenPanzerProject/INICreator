@@ -127,18 +127,45 @@ uint32_t MainWindow::switchSettingsToID(switch_function sf, switch_action sa, ui
     return ((multiplier_switchfunction * sf) + (multiplier_switchaction * sa) + num);
 }
 
+
 //------------------------------------------------------------------------------------------------------------------------>>
 // FILE - READING AND WRITING
 //------------------------------------------------------------------------------------------------------------------------>>
+// Retrieve the last location the user accessed files from, or if none, default to desktop. By using QSettings this
+// information will persist even when the program is closed
+QString MainWindow::GetLastPath()
+{
+    LastPath = ProgIni.value("DefaultFileLoc").toString();
+    // If nothing, set it to desktop to start
+    if (LastPath == "")
+    {
+        LastPath = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+        ProgIni.setValue("DefaultFileLoc",LastPath);
+    }
+    return LastPath;
+}
+
+// Save a new path to our persistent variable
+void MainWindow::StoreLastPath(QString p)
+{
+    QFileInfo fi(p);
+    QString path = fi.path();                       // Easy way to get just the path
+    LastPath = path;
+    ProgIni.setValue("DefaultFileLoc",LastPath);    // Save the path to our QSettings object
+}
+
 // This is just the Device menu action, and we simply get a file path/name from the user, then pass it to the actual reading function
 void MainWindow::actionReadSettingsFromFile()
 {
-    const QString desktopFolder = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
-    QString filename = QFileDialog::getOpenFileName(this, tr("Import Settings from INI File"), desktopFolder, tr("INI files (*.ini)"));
+    GetLastPath();
+    QString filename = QFileDialog::getOpenFileName(this, tr("Import Settings from INI File"), LastPath, tr("INI files (*.ini)"));
 
     if (filename == "") return;     // Exit if they cancel
-    else readSettingsFromFile(filename, false);
-
+    else
+    {   // Otherwise save the new path, then open
+        StoreLastPath(filename);
+        readSettingsFromFile(filename, false);
+    }
 }
 
 // This is the actual reading function, it takes a file path/name as argument.
@@ -403,12 +430,13 @@ void MainWindow::readSettingsFromFile(QString filename, boolean confirm)
 }
 void MainWindow::writeSettingsToFile()
 {
-    const QString desktopFolder = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
-    QString filename = QFileDialog::getSaveFileName(this, tr("Save Settings to INI File"),QString("%1/opsound.ini").arg(desktopFolder), tr("INI files (*.ini)"));
+    GetLastPath();
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save Settings to INI File"),QString("%1/opsound.ini").arg(LastPath), tr("INI files (*.ini)"));
 
-    if (filename == "") return; // Exit if they cancel
+    if (filename == "") return;     // Exit if they cancel
+    else StoreLastPath(filename);   // Otherwise save the new path, then open
 
-    // Create a settings object
+    // Create a settings object at the specified location
     QSettings* settingsTo = new QSettings(filename, QSettings::IniFormat);
 
     // If you don't call this, the "sync" command we use later will keep prior keys, and only add new ones.
