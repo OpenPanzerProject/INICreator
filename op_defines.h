@@ -8,8 +8,8 @@
 // -----------------------------------------------------------------------------------------------------
 // Not very sophisticated. Here we store the URLs to the latest release hex and version files, and we
 // assume they will never change in a million years.
-#define LATEST_RELEASE_VERSION_URL_TEENSYSOUND    "http://openpanzer.org/downloads/soundcard/firmware/version.txt"
-#define LATEST_RELEASE_HEX_URL_TEENSYSOUND        "http://openpanzer.org/downloads/soundcard/firmware/opsound.hex"
+#define LATEST_RELEASE_VERSION_URL_TEENSYSOUND    "https://openpanzer.org/downloads/soundcard/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_TEENSYSOUND        "https://openpanzer.org/downloads/soundcard/firmware/opsound.hex"
 
 // General
 // -----------------------------------------------------------------------------------------------------

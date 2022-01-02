@@ -224,7 +224,7 @@ void MainWindow::initWinSparkle()
 
     //If these functions aren't called by the app, the URL is obtained from
     //Windows resource named "FeedURL" of type "APPCAST".
-//    win_sparkle_set_appcast_url("http://openpanzer.org/downloads/soundcard/inicreator/latestrelease/appcast.xml");
+//    win_sparkle_set_appcast_url("https://openpanzer.org/downloads/soundcard/inicreator/latestrelease/appcast.xml");
 //    win_sparkle_set_app_details(L"openpanzer.org", L"OP Config Update Example", L"1.0");
 
     // This specifies whether automatic checks should occur. We do not want automatic checks because it
@@ -708,12 +708,12 @@ void MainWindow::About()
     infoText.append(VER_PRODUCTVERSION_STR);
     infoText.append("<br /><br />&#169; ");
     infoText.append(VER_COPYRIGHT_YEAR_STR);
-    infoText.append(" <a href='http://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");
+    infoText.append(" <a href='https://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");
 
     about.setWindowTitle("  INI Creator");
     about.setTextFormat(Qt::RichText);   //this is what makes the links clickable
     about.setText("An ini-file creator utility for the&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />Open Panzer Sound Card.");
-    //about.setInformativeText("<span style='font-size: 12px;'>Version 1.0<br /><br />&#169; 2016 <a href='http://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");
+    //about.setInformativeText("<span style='font-size: 12px;'>Version 1.0<br /><br />&#169; 2016 <a href='https://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");
     about.setInformativeText(infoText);
     about.setStandardButtons(QMessageBox::Ok);
     about.setIconPixmap(QPixmap(":/images/AboutIcon.png"));

@@ -5,7 +5,7 @@ IC01 ICON "images/inicreator.ico"
 #include "version.h"
 
 // Get updates from this appcast feed:
-FeedURL     APPCAST     {"http://www.openpanzer.org/downloads/soundcard/inicreator/latestrelease/appcast.xml"}
+FeedURL     APPCAST     {"https://www.openpanzer.org/downloads/soundcard/inicreator/latestrelease/appcast.xml"}
 
 VS_VERSION_INFO VERSIONINFO
 FILEVERSION     VER_FILEVERSION
