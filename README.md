@@ -5,12 +5,12 @@ Alternatively the sound card can be controlled directly by standard hobby RC sig
 
 In other words, you only need this application if you intend to use the sound card in RC mode. If you are using it in combination with the TCB you can ignore this utility. 
 
-This repository contains the source code for the INI Creator Utility, written in C++ in Qt Creator 3.4.1 using Qt 5.4.2. Qt is an open source application development software. Unless you are a developer that wants to re-compile or modify this application you probably don't need anything on this page. Instead, you can download a pre-compiled, installable version of INI Creator on the [Open Panzer Downloads](http://www.openpanzer.org/downloads#sound) page.
+This repository contains the source code for the INI Creator Utility, written in C++ in Qt Creator 3.4.1 using Qt 5.4.2. Qt is an open source application development software. Unless you are a developer that wants to re-compile or modify this application you probably don't need anything on this page. Instead, you can download a pre-compiled, installable version of INI Creator on the [Open Panzer Downloads](https://www.openpanzer.org/downloads#sound) page.
 
 ## Further Resources
-  * For more information on the Open Panzer project, see the [OpenPanzer Wiki](http://wiki.openpanzer.org).
-  * To discuss the project, feel free to join the [Open Panzer Community](http://openpanzer.org/forum/index.php?action=forum).
-  * To download a compiled version of INI Creator for installation in Windows, see the [Open Panzer Downloads](http://www.openpanzer.org/downloads#sound) page. 
+  * For more information on the Open Panzer project, see the [OpenPanzer Wiki](https://www.openpanzer.org/wiki/).
+  * To discuss the project, feel free to join the [Open Panzer Community](https://openpanzer.org/forum/index.php?action=forum).
+  * To download a compiled version of INI Creator for installation in Windows, see the [Open Panzer Downloads](https://www.openpanzer.org/downloads#sound) page. 
 
 ## License
 Source files for the INI Creator are free software: you can redistribute them and/or modify them under the terms of the GNU General Public License version 3 as published by the Free Software Foundation.
